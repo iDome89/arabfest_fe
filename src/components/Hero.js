@@ -33,18 +33,6 @@ export const Hero = () => {
         backgroundImage: `url(${banner?.attributes.background_image.data.attributes.url || ''})`,
       }}
     >
-      <div className="hero-content text-center text-neutral-content">
-        <div className="max-w-md">
-          <p className="mb-5 text-white">
-            Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-            excepturi exercitationem quasi. In deleniti eaque aut repudiandae et
-            a id nisi.
-          </p>
-          <button className="btn btn-primary text-white">Get Started</button>
-        </div>
-      </div>
     </div>
   );
 };
-
-

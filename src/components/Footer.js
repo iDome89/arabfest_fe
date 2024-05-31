@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import apiRequest from "../utils/apiRequest";
-import { FaInstagram, FaYoutube, FaFacebook, FaTwitter, FaGoogle, FaPinterest, FaInstagramSquare } from "react-icons/fa";
+import { FaInstagram, FaYoutube, FaFacebook } from "react-icons/fa";
 
 export const Footer = () => {
   const [contact, setContact] = useState(null);
@@ -31,6 +31,7 @@ export const Footer = () => {
         <div>
           <h2 className="text-3xl font-bold text-black">ARABFEST</h2>
         </div>
+
         <div className="flex space-x-6">
           <a href={contact.attributes.instagram} target="_blank" rel="noopener noreferrer">
             <FaInstagram className="text-gray-600 hover:text-gray-800" />
@@ -44,6 +45,8 @@ export const Footer = () => {
         </div>
       </div>
       <div className="container mx-auto mt-8 text-center text-gray-500">
+        <h3>{contact.attributes.full_name}</h3>
+        <h3>{contact.attributes.email}</h3>
         <p>© 2024 Arabfest. All rights reserved.</p>
       </div>
     </footer>
