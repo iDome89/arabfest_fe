@@ -21,7 +21,6 @@ export const Sponsors = () => {
     };
     fetchSponsor();
   }, []);
-  console.log(sponsors);
   if (!sponsors) {
     return <div>Loading...</div>;
   }
