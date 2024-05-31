@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import apiRequest from "../utils/apiRequest";
-
 
 export const Team = () => {
   const [members, setMembers] = useState(null);
+
   useEffect(() => {
     const fetchMembers = async () => {
       try {
@@ -26,25 +26,24 @@ export const Team = () => {
   if (!members) {
     return <div>Loading...</div>;
   }
-console.log(members)
+
   return (
-    <div className="bg-white flex justify-center py-10">
-      <div className="grid-cols-3 grid bg-white gap-4 w-7xl">
-        <h2 className="text-2xl text-center text-black mb-4 col-span-3">Our Team</h2>
+    <div className="bg-white py-10">
+      <h2 className="text-3xl text-center text-black mb-12">Náš tým</h2>
+      <div className="container mx-auto flex flex-wrap justify-center">
         {members.length > 0 &&
-          members.map((member) => (
-            <div className="card card-compact w-[210px] bg-base-100 shadow-xl grid content-center">
-              <figure>
+          members.map((member, index) => (
+            <div key={index} className="w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 px-2 mb-8">
+              <div className="overflow-hidden rounded-lg shadow-lg">
                 <img
                   src={member.attributes.team_member.picture.data[0].attributes.url}
-                  alt="Shoes"
+                  alt={`${member.attributes.team_member.first_name} ${member.attributes.team_member.last_name}`}
+                  className="w-full h-auto object-cover"
                 />
-              </figure>
-              <div className="card-body">
-                <h2 className="card-title mb-2">{member.attributes.team_member.first_name} {member.attributes.team_member.last_name}</h2>
-                <p>{member.attributes.team_member.role}</p>
-                <a href={`tel:${member.attributes.team_member.phone}`}>{member.attributes.team_member.phone}</a>
-                <a href={`mailto:${member.attributes.team_member.email}`}>{member.attributes.team_member.email}</a>
+                <div className="bg-gray-200 text-center py-2">
+                  <p className="text-lg font-semibold text-black">{`${member.attributes.team_member.first_name} ${member.attributes.team_member.last_name}`}</p>
+                  <p className="text-gray-600">{member.attributes.team_member.role}</p>
+                </div>
               </div>
             </div>
           ))}
@@ -52,3 +51,5 @@ console.log(members)
     </div>
   );
 };
+
+export default Team;
