@@ -52,14 +52,24 @@ export const Team = () => {
                   <p className="text-gray-600">
                     {member.attributes.team_member.role}
                   </p>
-                  <a className="flex justify-center items-center gap-1" href={`tel:${member.attributes.team_member.phone}`}>
-                    <FaPhoneAlt />
-                    {member.attributes.team_member.phone}
-                  </a>
-                  <a className="flex justify-center items-center gap-1"  href={`mailto:${member.attributes.team_member.email}`}>
-                    <MdEmail />
-                    {member.attributes.team_member.email}
-                  </a>
+                  {member.attributes.team_member.phone && (
+                    <a
+                      className="flex justify-center items-center gap-1"
+                      href={`tel:${member.attributes.team_member.phone}`}
+                    >
+                      <FaPhoneAlt />
+                      {member.attributes.team_member.phone}
+                    </a>
+                  )}
+                  {member.attributes.team_member.email && (
+                    <a
+                      className="flex justify-center items-center gap-1"
+                      href={`mailto:${member.attributes.team_member.email}`}
+                    >
+                      <MdEmail />
+                      {member.attributes.team_member.email}
+                    </a>
+                  )}
                 </div>
               </div>
             </div>
