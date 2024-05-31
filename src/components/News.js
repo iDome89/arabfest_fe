@@ -27,7 +27,7 @@ export const News = () => {
   if (!news) {
     return <div>Loading...</div>;
   }
-
+console.log(news)
   const formatDate = (dateString) => {
     const date = new Date(dateString);
 
@@ -47,13 +47,12 @@ export const News = () => {
       month: "numeric",
       year: "numeric",
     });
-
+   
     const formattedTime = date.toLocaleTimeString(locale, {
       hour: "numeric",
       minute: "numeric",
       hour12: false,
     });
-
     return `${formattedDate} ${formattedTime}`;
   };
 
