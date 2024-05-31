@@ -6,6 +6,7 @@ import remarkGfm from "remark-gfm";
 
 export const News = () => {
   const [news, setNews] = useState(null);
+  const [expandedIndex, setExpandedIndex] = useState(null);
 
   useEffect(() => {
     const fetchnews = async () => {
@@ -17,11 +18,12 @@ export const News = () => {
         });
         setNews(response.data.data);
       } catch (error) {
-        console.error("Error fetching members:", error);
+        console.error("Error fetching news:", error);
       }
     };
     fetchnews();
   }, []);
+
   if (!news) {
     return <div>Loading...</div>;
   }
@@ -54,29 +56,48 @@ export const News = () => {
 
     return `${formattedDate} ${formattedTime}`;
   };
+
+  const toggleExpand = (index) => {
+    setExpandedIndex(expandedIndex === index ? null : index);
+  };
+
   return (
-    <div className="bg-white">
-      <h2 className="text-2xl text-center font-bold text-gray-800">News</h2>
-      <div className="grid grid-cols-3 ">
-        {news.map((article, index) => (
-          <div>
-            <h2>{article.attributes.title}</h2>
-            <p>
-              {formatDate(article.attributes.date) ??
-                formatDate(article.attributes.published_at)}
-            </p>
-            <ReactMarkdown
-              children={article.attributes.content}
-              rehypePlugins={[rehypeRaw]}
-              remarkPlugins={[remarkGfm]}
-              components={{
-                a: ({ node, ...props }) => (
-                  <a {...props} target="_blank" rel="noopener noreferrer" />
-                ),
-              }}
-            />
-          </div>
-        ))}
+    <div className="bg-gray-100 py-10">
+      <h2 className="text-3xl text-center font-bold text-gray-800 mb-8">Novinky</h2>
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {news.map((article, index) => {
+          const isExpanded = expandedIndex === index;
+          const content = article.attributes.content;
+          const truncatedContent = content.split(" ").slice(0, 30).join(" ") + "...";
+
+          return (
+            <div key={index} className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+              <h3 className="text-xl font-semibold text-[#22c55f] mb-2">{article.attributes.title}</h3>
+              <p className="text-gray-500 mb-4">
+                {formatDate(article.attributes.date) ??
+                  formatDate(article.attributes.published_at)}
+              </p>
+              <div className="prose prose-sm max-w-none">
+                <ReactMarkdown
+                  children={isExpanded ? content : truncatedContent}
+                  rehypePlugins={[rehypeRaw]}
+                  remarkPlugins={[remarkGfm]}
+                  components={{
+                    a: ({ node, ...props }) => (
+                      <a {...props} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline" />
+                    ),
+                  }}
+                />
+              </div>
+              <button
+                onClick={() => toggleExpand(index)}
+                className="mt-4 text-blue-500 hover:underline"
+              >
+                {isExpanded ? "Méně" : "Více"}
+              </button>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

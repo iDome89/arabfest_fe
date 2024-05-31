@@ -31,7 +31,7 @@ export const Team = () => {
 
   return (
     <div className="bg-white py-10">
-      <h2 className="text-3xl text-center text-black mb-12">Náš tým</h2>
+      <h2 className="text-3xl text-center font-bold text-gray-800 mb-8">Náš tým</h2>
       <div className="container mx-auto flex flex-wrap justify-center">
         {members.length > 0 &&
           members.map((member, index) => (
