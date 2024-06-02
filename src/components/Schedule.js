@@ -1,11 +1,48 @@
+import { useState, useEffect } from "react";
+import apiRequest from "../utils/apiRequest";
+
 export const Schedule = () => {
+  const [events, setEvents] = useState([]);
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const response = await apiRequest.get("/events?populate=*", {
+          headers: {
+            Authorization: `Bearer ${process.env.NEXT_PUBLIC_STRAPI_API}`,
+          },
+        });
+        setEvents(response.data.data);
+      } catch (error) {
+        console.error("Error fetching news:", error);
+      }
+    };
+    fetchEvents();
+  }, []);
+
+  if (!events) {
+    return <div>Loading...</div>;
+  }
+ 
+  const primaryEvents = events.filter(
+    (event) => event.attributes.event_type === "primary"
+  );
+  const secondaryEvents = events.filter(
+    (event) => event.attributes.event_type === "secondary"
+  );
+  const pragueEvents = events.filter(
+    (event) => event.attributes.event_type === "prague_event"
+  );
+  const eventDates = primaryEvents.map((event) => event.attributes.date);
+  const uniqueEventDates = [...new Set(eventDates)];
+
   return (
     <div>
       <div className="bg-white max-w-7xl">
         <div role="tablist" className="tabs tabs-boxed">
-            <a role="tab" className="tab tab-active">
-              Tab 1
-            </a>
+          <a role="tab" className="tab tab-active">
+            Tab 1
+          </a>
           <div role="tabpanel" className="tab-content">
             <ul className="timeline timeline-vertical">
               <li>
