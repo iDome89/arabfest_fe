@@ -10,17 +10,29 @@ import { Team } from "../components/Team";
 
 export default function Home() {
   return (
-    <main
-      className={`flex min-h-screen flex-col bg-transparent`}
-    >
+    <main className="flex min-h-screen flex-col bg-transparent">
       <Navbar />
-      <Hero />
-      <News />
-      <About />
-      <Team />
-      <Schedule />
-      <Sponsors />
-      <Reservations />
+      <section id="hero">
+        <Hero />
+      </section>
+      <section id="news">
+        <News />
+      </section>
+      <section id="about">
+        <About />
+      </section>
+      <section id="team">
+        <Team />
+      </section>
+      <section id="schedule">
+        <Schedule />
+      </section>
+      <section id="sponsors">
+        <Sponsors />
+      </section>
+      <section id="reservations">
+        <Reservations />
+      </section>
       <Footer />
     </main>
   );

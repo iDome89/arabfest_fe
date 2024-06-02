@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-scroll';
 
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [headerHeight, setHeaderHeight] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -13,6 +15,12 @@ export const Navbar = () => {
     };
 
     window.addEventListener('scroll', handleScroll);
+
+    // Set the header height dynamically
+    const headerElement = document.querySelector('.navbar');
+    if (headerElement) {
+      setHeaderHeight(headerElement.offsetHeight);
+    }
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
@@ -33,28 +41,70 @@ export const Navbar = () => {
       <div className="flex-none">
         <ul className="menu menu-horizontal px-1">
           <li>
-            <a className={`transition-colors duration-300 ${isScrolled ? 'text-black' : 'text-white font-bold'}`}>HOME</a>
+            <Link
+              to="hero"
+              smooth={true}
+              duration={500}
+              offset={-headerHeight}
+              className={`transition-colors duration-300 ${isScrolled ? 'text-black' : 'text-white font-bold'}`}
+            >
+              DOMŮ
+            </Link>
           </li>
           <li>
-            <a className={`transition-colors duration-300 ${isScrolled ? 'text-black' : 'text-white font-bold'}`}>ABOUT</a>
+            <Link
+              to="news"
+              smooth={true}
+              duration={500}
+              offset={-headerHeight}
+              className={`transition-colors duration-300 ${isScrolled ? 'text-black' : 'text-white font-bold'}`}
+            >
+              NOVINKY
+            </Link>
           </li>
           <li>
-            <a className={`transition-colors duration-300 ${isScrolled ? 'text-black' : 'text-white font-bold'}`}>VENUE</a>
+            <Link
+              to="about"
+              smooth={true}
+              duration={500}
+              offset={-headerHeight}
+              className={`transition-colors duration-300 ${isScrolled ? 'text-black' : 'text-white font-bold'}`}
+            >
+              O FESTIVALU
+            </Link>
           </li>
           <li>
-            <a className={`transition-colors duration-300 ${isScrolled ? 'text-black' : 'text-white font-bold'}`}>SPEAKERS</a>
+            <Link
+              to="team"
+              smooth={true}
+              duration={500}
+              offset={-headerHeight}
+              className={`transition-colors duration-300 ${isScrolled ? 'text-black' : 'text-white font-bold'}`}
+            >
+              NÁŠ TÝM
+            </Link>
           </li>
           <li>
-            <a className={`transition-colors duration-300 ${isScrolled ? 'text-black' : 'text-white font-bold'}`}>SCHEDULE</a>
+            <Link
+              to="sponsors"
+              smooth={true}
+              duration={500}
+              offset={-headerHeight}
+              className={`transition-colors duration-300 ${isScrolled ? 'text-black' : 'text-white font-bold'}`}
+            >
+              PARTNEŘI
+            </Link>
           </li>
           <li>
-            <a className={`transition-colors duration-300 ${isScrolled ? 'text-black' : 'text-white font-bold'}`}>HOTELS</a>
-          </li>
-          <li>
-            <a className={`transition-colors duration-300 ${isScrolled ? 'text-black' : 'text-white font-bold'}`}>TICKET</a>
-          </li>
-          <li>
-            <a className={`transition-colors duration-300 ${isScrolled ? 'text-black' : 'text-white font-bold'}`}>PAGES</a>
+            <Link
+              to="reservations"
+              smooth={true}
+              duration={500}
+              offset={-headerHeight}
+              className={`transition-colors duration-300 ${isScrolled ? 'text-black' : 'text-white font-bold'}`}
+            >
+              REZERVACE
+            </Link>
           </li>
         </ul>
       </div>
