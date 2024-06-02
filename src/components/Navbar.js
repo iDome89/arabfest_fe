@@ -16,7 +16,6 @@ export const Navbar = () => {
 
     window.addEventListener('scroll', handleScroll);
 
-    // Set the header height dynamically
     const headerElement = document.querySelector('.navbar');
     if (headerElement) {
       setHeaderHeight(headerElement.offsetHeight);
