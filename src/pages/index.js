@@ -25,7 +25,7 @@ export default function Home() {
       <section id="team">
         <Team />
       </section>
-      <section id="schedule">
+      <section id="events">
         <Schedule />
       </section>
       <section id="sponsors">

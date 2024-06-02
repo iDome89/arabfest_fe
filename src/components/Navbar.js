@@ -85,6 +85,17 @@ export const Navbar = () => {
           </li>
           <li>
             <Link
+              to="events"
+              smooth={true}
+              duration={500}
+              offset={-headerHeight}
+              className={`transition-colors duration-300 ${isScrolled ? 'text-black' : 'text-white font-bold'}`}
+            >
+              AKCE
+            </Link>
+          </li>
+          <li>
+            <Link
               to="sponsors"
               smooth={true}
               duration={500}
