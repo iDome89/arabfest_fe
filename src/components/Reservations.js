@@ -9,6 +9,17 @@ export const Reservations = () => {
       </div>
       <div className="max-w-4xl mx-auto">
         <form className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="col-span-2">
+            <div className='w-[300px]'>
+                <select className='w-full border border-gray-300 p-3 rounded-md bg-gray-100'>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
+            </div>
+          </div>
           <div className="col-span-1"> 
             <input
               type="text"
