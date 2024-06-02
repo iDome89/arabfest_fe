@@ -97,6 +97,17 @@ export const Navbar = () => {
           </li>
           <li>
             <Link
+              to="contact"
+              smooth={true}
+              duration={500}
+              offset={-headerHeight}
+              className={`transition-colors duration-300 ${isScrolled ? 'text-black' : 'text-white font-bold'}`}
+            >
+              KONTAKT
+            </Link>
+          </li>
+          <li>
+            <Link
               to="reservations"
               smooth={true}
               duration={500}

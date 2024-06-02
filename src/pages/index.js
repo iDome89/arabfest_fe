@@ -7,6 +7,7 @@ import { Reservations } from "../components/Reservations";
 import { Schedule } from "../components/Schedule";
 import { Sponsors } from "../components/Sponsors";
 import { Team } from "../components/Team";
+import Contact from "@/components/Contact";
 
 export default function Home() {
   return (
@@ -29,6 +30,9 @@ export default function Home() {
       </section>
       <section id="sponsors">
         <Sponsors />
+      </section>
+      <section id="contact">
+        <Contact />
       </section>
       <section id="reservations">
         <Reservations />
