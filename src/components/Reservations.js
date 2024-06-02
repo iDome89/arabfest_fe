@@ -47,7 +47,7 @@ export const Reservations = () => {
           <div className="col-span-2 text-right">
             <button
               type="submit"
-              className="bg-green-500 text-white py-2 px-6 rounded-md hover:bg-green-600 transition-colors duration-300"
+              className="bg-green-600 text-white py-2 px-6 rounded-md hover:bg-green-600 transition-colors duration-300"
             >
               POSLAT ZPRÁVU
             </button>

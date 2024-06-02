@@ -54,7 +54,7 @@ export const Team = () => {
                   </p>
                   {member.attributes.team_member.phone && (
                     <a
-                      className="flex justify-center items-center gap-1"
+                      className="flex justify-center items-center gap-1 text-green-700"
                       href={`tel:${member.attributes.team_member.phone}`}
                     >
                       <FaPhoneAlt />
@@ -63,7 +63,7 @@ export const Team = () => {
                   )}
                   {member.attributes.team_member.email && (
                     <a
-                      className="flex justify-center items-center gap-1"
+                      className="flex justify-center items-center gap-1 text-green-700"
                       href={`mailto:${member.attributes.team_member.email}`}
                     >
                       <MdEmail />
