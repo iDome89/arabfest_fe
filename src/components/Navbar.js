@@ -39,7 +39,7 @@ export const Navbar = () => {
       </div>
       <div className="flex-none">
         <ul className="menu menu-horizontal px-1">
-          <li>
+          <li className='hover:bg-green-500 rounded'>
             <Link
               to="hero"
               smooth={true}
@@ -50,7 +50,7 @@ export const Navbar = () => {
               DOMŮ
             </Link>
           </li>
-          <li>
+          <li className='hover:bg-green-500 rounded'>
             <Link
               to="news"
               smooth={true}
@@ -61,7 +61,7 @@ export const Navbar = () => {
               NOVINKY
             </Link>
           </li>
-          <li>
+          <li className='hover:bg-green-500 rounded'>
             <Link
               to="about"
               smooth={true}
@@ -72,7 +72,7 @@ export const Navbar = () => {
               O FESTIVALU
             </Link>
           </li>
-          <li>
+          <li className='hover:bg-green-500 rounded'>
             <Link
               to="team"
               smooth={true}
@@ -83,7 +83,7 @@ export const Navbar = () => {
               NÁŠ TÝM
             </Link>
           </li>
-          <li>
+          <li className='hover:bg-green-500 rounded'>
             <Link
               to="events"
               smooth={true}
@@ -94,7 +94,7 @@ export const Navbar = () => {
               AKCE
             </Link>
           </li>
-          <li>
+          <li className='hover:bg-green-500 rounded'>
             <Link
               to="sponsors"
               smooth={true}
@@ -105,7 +105,7 @@ export const Navbar = () => {
               PARTNEŘI
             </Link>
           </li>
-          <li>
+          <li className='hover:bg-green-500 rounded'>
             <Link
               to="contact"
               smooth={true}
@@ -116,7 +116,7 @@ export const Navbar = () => {
               KONTAKT
             </Link>
           </li>
-          <li>
+          <li className='hover:bg-green-500 rounded'>
             <Link
               to="reservations"
               smooth={true}

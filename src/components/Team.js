@@ -10,13 +10,14 @@ export const Team = () => {
     const fetchMembers = async () => {
       try {
         const response = await apiRequest.get(
-          "/teams?populate=team_member.picture",
+          "/teams?sort=order&&pagination[limit]=15&populate=team_member.picture",
           {
             headers: {
               Authorization: `Bearer ${process.env.NEXT_PUBLIC_STRAPI_API}`,
             },
           }
         );
+        console.log(response.data)
         setMembers(response.data.data);
       } catch (error) {
         console.error("Error fetching members:", error);
@@ -39,7 +40,7 @@ export const Team = () => {
               key={index}
               className="w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 px-2 mb-8"
             >
-              <div className="overflow-hidden rounded-lg shadow-lg">
+              <div className="overflow-hidden h-full bg-gray-200 rounded-lg shadow-lg">
                 <img
                   src={
                     member.attributes.team_member.picture.data[0].attributes.url

@@ -72,6 +72,9 @@ export const Schedule = () => {
   }
 
   const renderPrimaryEventsForDate = (eventsForDate) => {
+    if (!eventsForDate) {
+      return <div className="text-center text-gray-500">No events found</div>;
+    }
     return eventsForDate.map((event, index) => (
       <li key={index} className="relative mb-6 p-4 bg-white rounded-lg shadow-md">
         <div className="flex items-center">
@@ -88,6 +91,9 @@ export const Schedule = () => {
   };
 
   const renderSecondaryAndPragueEvents = (eventList) => {
+    if (eventList.length === 0) {
+      return <div className="text-center text-gray-500">No events found</div>;
+    }
     return eventList.map((event, index) => (
       <li key={index} className="relative mb-6 p-4 bg-white rounded-lg shadow-md">
         <div className="flex items-center">
