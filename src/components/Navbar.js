@@ -28,105 +28,30 @@ export const Navbar = () => {
 
   return (
     <div
-      className={`navbar p-6 fixed z-10 w-full transition-all duration-300 ${
-        isScrolled ? 'bg-white shadow-none' : 'bg-transparent header-shadow'
+      className={`navbar p-4 sm:p-6 fixed z-10 w-full transition-all duration-300 ${
+        isScrolled ? 'bg-white shadow-lg' : 'bg-transparent header-shadow'
       }`}
     >
       <div className="flex-1">
-        <a className={`text-3xl font-bold transition-colors duration-300 ${isScrolled ? 'text-black' : 'text-white'}`}>
+        <a className={`text-2xl sm:text-3xl font-bold transition-colors duration-300 ${isScrolled ? 'text-black' : 'text-white'}`}>
           ARABFEST
         </a>
       </div>
       <div className="flex-none">
-        <ul className="menu menu-horizontal px-1">
-          <li className='hover:bg-green-500 rounded'>
-            <Link
-              to="hero"
-              smooth={true}
-              duration={500}
-              offset={-headerHeight}
-              className={`transition-colors duration-300 ${isScrolled ? 'text-black' : 'text-white font-bold'}`}
-            >
-              DOMŮ
-            </Link>
-          </li>
-          <li className='hover:bg-green-500 rounded'>
-            <Link
-              to="news"
-              smooth={true}
-              duration={500}
-              offset={-headerHeight}
-              className={`transition-colors duration-300 ${isScrolled ? 'text-black' : 'text-white font-bold'}`}
-            >
-              NOVINKY
-            </Link>
-          </li>
-          <li className='hover:bg-green-500 rounded'>
-            <Link
-              to="about"
-              smooth={true}
-              duration={500}
-              offset={-headerHeight}
-              className={`transition-colors duration-300 ${isScrolled ? 'text-black' : 'text-white font-bold'}`}
-            >
-              O FESTIVALU
-            </Link>
-          </li>
-          <li className='hover:bg-green-500 rounded'>
-            <Link
-              to="team"
-              smooth={true}
-              duration={500}
-              offset={-headerHeight}
-              className={`transition-colors duration-300 ${isScrolled ? 'text-black' : 'text-white font-bold'}`}
-            >
-              NÁŠ TÝM
-            </Link>
-          </li>
-          <li className='hover:bg-green-500 rounded'>
-            <Link
-              to="events"
-              smooth={true}
-              duration={500}
-              offset={-headerHeight}
-              className={`transition-colors duration-300 ${isScrolled ? 'text-black' : 'text-white font-bold'}`}
-            >
-              AKCE
-            </Link>
-          </li>
-          <li className='hover:bg-green-500 rounded'>
-            <Link
-              to="sponsors"
-              smooth={true}
-              duration={500}
-              offset={-headerHeight}
-              className={`transition-colors duration-300 ${isScrolled ? 'text-black' : 'text-white font-bold'}`}
-            >
-              PARTNEŘI
-            </Link>
-          </li>
-          <li className='hover:bg-green-500 rounded'>
-            <Link
-              to="contact"
-              smooth={true}
-              duration={500}
-              offset={-headerHeight}
-              className={`transition-colors duration-300 ${isScrolled ? 'text-black' : 'text-white font-bold'}`}
-            >
-              KONTAKT
-            </Link>
-          </li>
-          <li className='hover:bg-green-500 rounded'>
-            <Link
-              to="reservations"
-              smooth={true}
-              duration={500}
-              offset={-headerHeight}
-              className={`transition-colors duration-300 ${isScrolled ? 'text-black' : 'text-white font-bold'}`}
-            >
-              REZERVACE
-            </Link>
-          </li>
+        <ul className="menu menu-horizontal px-1 space-x-4 sm:space-x-6">
+          {['hero', 'news', 'about', 'team', 'events', 'sponsors', 'contact', 'reservations'].map((section, index) => (
+            <li key={index}>
+              <Link
+                to={section}
+                smooth={true}
+                duration={500}
+                offset={-headerHeight}
+                className={`transition-colors duration-300 ${isScrolled ? 'text-black' : 'text-white font-bold'}`}
+              >
+                {section.toUpperCase()}
+              </Link>
+            </li>
+          ))}
         </ul>
       </div>
     </div>

@@ -27,27 +27,27 @@ export const Footer = () => {
 
   return (
     <footer className="bg-white py-8 border-t">
-      <div className="container mx-auto flex justify-between items-center">
-        <div>
+      <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
+        <div className="mb-4 md:mb-0">
           <h2 className="text-3xl font-bold text-black">ARABFEST</h2>
         </div>
 
         <div className="flex space-x-6">
           <a href={contact.attributes.instagram} target="_blank" rel="noopener noreferrer">
-            <FaInstagram className="text-gray-600 hover:text-gray-800" />
+            <FaInstagram className="text-gray-600 hover:text-gray-800" size={30} />
           </a>
           <a href={contact.attributes.facebook} target="_blank" rel="noopener noreferrer">
-            <FaFacebook className="text-gray-600 hover:text-gray-800" />
+            <FaFacebook className="text-gray-600 hover:text-gray-800" size={30} />
           </a>
           <a href={contact.attributes.youtube} target="_blank" rel="noopener noreferrer">
-            <FaYoutube className="text-gray-600 hover:text-gray-800" />
+            <FaYoutube className="text-gray-600 hover:text-gray-800" size={30} />
           </a>
         </div>
       </div>
       <div className="container mx-auto mt-8 text-center text-gray-500">
-        <h3>{contact.attributes.full_name}</h3>
-        <h3>{contact.attributes.email}</h3>
-        <p>© 2024 Arabfest. All rights reserved.</p>
+        <h3 className="text-lg">{contact.attributes.full_name}</h3>
+        <h3 className="text-lg">{contact.attributes.email}</h3>
+        <p className="text-sm">© 2024 Arabfest. All rights reserved.</p>
       </div>
     </footer>
   );

@@ -49,10 +49,10 @@ export const About = () => {
   }
 
   return (
-    <div className="bg-white py-12 px-6">
+    <div className="bg-white py-12 px-4 sm:px-6 lg:px-8">
       <div className="text-center mb-12">
         <h2 className="text-3xl font-bold text-gray-800 mb-4">O festivalu</h2>
-        <div className="prose prose-lg mx-auto text-gray-700">
+        <div className="prose prose-lg mx-auto text-gray-700 max-w-none lg:max-w-4xl">
           <ReactMarkdown
             children={about.attributes.short_content}
             rehypePlugins={[rehypeRaw]}
@@ -73,7 +73,7 @@ export const About = () => {
       <div className="relative w-full overflow-hidden mb-12">
         <Slider {...settings}>
           {carouselItems.map((item, index) => (
-            <div key={index} className="w-full h-96">
+            <div key={index} className="w-full h-64 sm:h-80 lg:h-96">
               <img src={item} className="w-full h-full object-cover" alt={`Carousel item ${index + 1}`} />
             </div>
           ))}

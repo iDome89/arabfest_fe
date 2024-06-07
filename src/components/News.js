@@ -9,7 +9,7 @@ export const News = () => {
   const [expandedIndex, setExpandedIndex] = useState(null);
 
   useEffect(() => {
-    const fetchnews = async () => {
+    const fetchNews = async () => {
       try {
         const response = await apiRequest.get("/news?populate=*", {
           headers: {
@@ -21,15 +21,15 @@ export const News = () => {
         console.error("Error fetching news:", error);
       }
     };
-    fetchnews();
+    fetchNews();
   }, []);
 
   if (!news) {
     return <div>Loading...</div>;
   }
+
   const formatDate = (dateString) => {
     const date = new Date(dateString);
-
     const options = {
       day: "numeric",
       month: "numeric",
@@ -38,20 +38,9 @@ export const News = () => {
       minute: "numeric",
       hour12: false,
     };
-
     const locale = navigator.language;
-
-    const formattedDate = date.toLocaleDateString(locale, {
-      day: "numeric",
-      month: "numeric",
-      year: "numeric",
-    });
-
-    const formattedTime = date.toLocaleTimeString(locale, {
-      hour: "numeric",
-      minute: "numeric",
-      hour12: false,
-    });
+    const formattedDate = date.toLocaleDateString(locale, options);
+    const formattedTime = date.toLocaleTimeString(locale, options);
     return `${formattedDate} ${formattedTime}`;
   };
 
@@ -64,7 +53,7 @@ export const News = () => {
       <h2 className="text-3xl text-center font-bold text-gray-800 mb-8">
         Novinky
       </h2>
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4 sm:px-6 lg:px-8">
         {news.map((article, index) => {
           const isExpanded = expandedIndex === index;
           const content = article.attributes.content;
