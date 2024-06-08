@@ -39,18 +39,18 @@ export const Sponsors = () => {
   }
 
   return (
-    <div className="bg-gray-50 py-12 px-6">
+    <div className="bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="text-center mb-12">
         <h2 className="text-3xl font-bold text-gray-800">Partneři</h2>
         <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
           Toto jsou naši úžasní sponzoři a partneři, kterým moc děkujeme za spolupráci.
         </p>
       </div>
-      <div className="flex flex-wrap justify-center gap-8">
+      <div className="flex flex-wrap justify-center gap-6">
         {sponsors.map((sponsor, index) => (
           <div
             key={index}
-            className="w-[300px] bg-white shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition-transform duration-300 relative flex flex-col"
+            className="w-full sm:w-[300px] bg-white shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition-transform duration-300 relative flex flex-col"
           >
             <a href={sponsor.attributes.url} target="_blank" rel="noopener noreferrer" className="block flex-shrink-0">
               <div className="h-40 flex items-center justify-center">

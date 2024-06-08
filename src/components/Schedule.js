@@ -76,7 +76,7 @@ export const Schedule = () => {
       return <div className="text-center text-gray-500">No events found</div>;
     }
     return eventsForDate.map((event, index) => (
-      <li key={index} className="relative mb-6 p-4 bg-white rounded-lg shadow-md">
+      <li key={index} className="relative mb-6 p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
         <div className="flex items-center">
           <div className="flex-shrink-0 h-10 w-10 rounded-full bg-green-600 flex items-center justify-center">
             <FaCheckCircle className="text-white w-5 h-5" />
@@ -95,7 +95,7 @@ export const Schedule = () => {
       return <div className="text-center text-gray-500">No events found</div>;
     }
     return eventList.map((event, index) => (
-      <li key={index} className="relative mb-6 p-4 bg-white rounded-lg shadow-md">
+      <li key={index} className="relative mb-6 p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
         <div className="flex items-center">
           <div className="flex-shrink-0 h-10 w-10 rounded-full bg-green-600 flex items-center justify-center">
             <FaCheckCircle className="text-white w-5 h-5" />
@@ -110,27 +110,27 @@ export const Schedule = () => {
   };
 
   return (
-    <div className="bg-white p-6">
+    <div className="bg-white py-12 px-4 sm:px-6 lg:px-8">
       <h2 className="text-3xl text-center font-bold text-gray-800 mb-8">Akce</h2>
       <div className="max-w-7xl mx-auto">
-        <div role="tablist" className="flex space-x-4 mb-6 justify-center">
+        <div role="tablist" className="flex flex-wrap space-x-2 mb-6 justify-center">
           <button
             role="tab"
-            className={`px-4 py-2 rounded-lg ${activeTab === 'primary' ? 'bg-green-600 text-white' : 'bg-gray-200 text-gray-800'} focus:outline-none`}
+            className={`px-4 py-2 rounded-lg mb-2 ${activeTab === 'primary' ? 'bg-green-500 text-white' : 'bg-gray-200 text-gray-800'} focus:outline-none`}
             onClick={() => setActiveTab('primary')}
           >
             Primary Events
           </button>
           <button
             role="tab"
-            className={`px-4 py-2 rounded-lg ${activeTab === 'secondary' ? 'bg-green-600 text-white' : 'bg-gray-200 text-gray-800'} focus:outline-none`}
+            className={`px-4 py-2 rounded-lg mb-2 ${activeTab === 'secondary' ? 'bg-green-500 text-white' : 'bg-gray-200 text-gray-800'} focus:outline-none`}
             onClick={() => setActiveTab('secondary')}
           >
             Secondary Events
           </button>
           <button
             role="tab"
-            className={`px-4 py-2 rounded-lg ${activeTab === 'prague' ? 'bg-green-600 text-white' : 'bg-gray-200 text-gray-800'} focus:outline-none`}
+            className={`px-4 py-2 rounded-lg mb-2 ${activeTab === 'prague' ? 'bg-green-500 text-white' : 'bg-gray-200 text-gray-800'} focus:outline-none`}
             onClick={() => setActiveTab('prague')}
           >
             Prague Events
@@ -139,12 +139,12 @@ export const Schedule = () => {
 
         {activeTab === 'primary' && (
           <div>
-            <div role="tablist" className="flex space-x-4 mb-6 justify-center">
+            <div role="tablist" className="flex flex-wrap space-x-2 mb-6 justify-center">
               {Object.keys(groupedPrimaryEvents).map((date) => (
                 <button
                   key={date}
                   role="tab"
-                  className={`px-4 py-2 rounded-lg ${activeDateTab === date ? 'bg-green-600 text-white' : 'bg-gray-200 text-gray-800'} focus:outline-none`}
+                  className={`px-4 py-2 rounded-lg mb-2 ${activeDateTab === date ? 'bg-green-500 text-white' : 'bg-gray-200 text-gray-800'} focus:outline-none`}
                   onClick={() => setActiveDateTab(date)}
                 >
                   {date}

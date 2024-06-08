@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-scroll';
+import { FaBars, FaTimes } from 'react-icons/fa';
 
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [headerHeight, setHeaderHeight] = useState(0);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -26,109 +28,61 @@ export const Navbar = () => {
     };
   }, []);
 
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
     <div
-      className={`navbar p-6 fixed z-10 w-full transition-all duration-300 ${
-        isScrolled ? 'bg-white shadow-none' : 'bg-transparent header-shadow'
+      className={`navbar p-4 sm:p-6 fixed z-10 w-full transition-all duration-300 ${
+        isScrolled ? 'bg-white shadow-lg' : 'bg-transparent header-shadow'
       }`}
     >
-      <div className="flex-1">
-        <a className={`text-3xl font-bold transition-colors duration-300 ${isScrolled ? 'text-black' : 'text-white'}`}>
-          ARABFEST
-        </a>
+      <div className="flex items-center justify-between">
+        <div className="flex items-center">
+          <div className="md:hidden">
+            <button onClick={toggleMenu} className={`focus:outline-none transition-colors duration-300 ${isScrolled ? 'text-black' : 'text-white'}`}>
+              {isMenuOpen ? <FaTimes size={30} /> : <FaBars size={30} />}
+            </button>
+          </div>
+          <a className={`ml-3 text-2xl sm:text-3xl font-bold transition-colors duration-300 ${isScrolled ? 'text-black' : 'text-white'}`}>
+            ARABFEST
+          </a>
+        </div>
+        <div className="hidden md:flex space-x-4 sm:space-x-6">
+          {['hero', 'news', 'about', 'team', 'events', 'sponsors', 'contact', 'reservations'].map((section, index) => (
+            <Link
+              key={index}
+              to={section}
+              smooth={true}
+              duration={500}
+              offset={-headerHeight}
+              className={`transition-colors duration-300 ${isScrolled ? 'text-black' : 'text-white font-bold'}`}
+            >
+              {section.toUpperCase()}
+            </Link>
+          ))}
+        </div>
       </div>
-      <div className="flex-none">
-        <ul className="menu menu-horizontal px-1">
-          <li className='hover:bg-green-500 rounded'>
-            <Link
-              to="hero"
-              smooth={true}
-              duration={500}
-              offset={-headerHeight}
-              className={`transition-colors duration-300 ${isScrolled ? 'text-black' : 'text-white font-bold'}`}
-            >
-              DOMŮ
-            </Link>
-          </li>
-          <li className='hover:bg-green-500 rounded'>
-            <Link
-              to="news"
-              smooth={true}
-              duration={500}
-              offset={-headerHeight}
-              className={`transition-colors duration-300 ${isScrolled ? 'text-black' : 'text-white font-bold'}`}
-            >
-              NOVINKY
-            </Link>
-          </li>
-          <li className='hover:bg-green-500 rounded'>
-            <Link
-              to="about"
-              smooth={true}
-              duration={500}
-              offset={-headerHeight}
-              className={`transition-colors duration-300 ${isScrolled ? 'text-black' : 'text-white font-bold'}`}
-            >
-              O FESTIVALU
-            </Link>
-          </li>
-          <li className='hover:bg-green-500 rounded'>
-            <Link
-              to="team"
-              smooth={true}
-              duration={500}
-              offset={-headerHeight}
-              className={`transition-colors duration-300 ${isScrolled ? 'text-black' : 'text-white font-bold'}`}
-            >
-              NÁŠ TÝM
-            </Link>
-          </li>
-          <li className='hover:bg-green-500 rounded'>
-            <Link
-              to="events"
-              smooth={true}
-              duration={500}
-              offset={-headerHeight}
-              className={`transition-colors duration-300 ${isScrolled ? 'text-black' : 'text-white font-bold'}`}
-            >
-              AKCE
-            </Link>
-          </li>
-          <li className='hover:bg-green-500 rounded'>
-            <Link
-              to="sponsors"
-              smooth={true}
-              duration={500}
-              offset={-headerHeight}
-              className={`transition-colors duration-300 ${isScrolled ? 'text-black' : 'text-white font-bold'}`}
-            >
-              PARTNEŘI
-            </Link>
-          </li>
-          <li className='hover:bg-green-500 rounded'>
-            <Link
-              to="contact"
-              smooth={true}
-              duration={500}
-              offset={-headerHeight}
-              className={`transition-colors duration-300 ${isScrolled ? 'text-black' : 'text-white font-bold'}`}
-            >
-              KONTAKT
-            </Link>
-          </li>
-          <li className='hover:bg-green-500 rounded'>
-            <Link
-              to="reservations"
-              smooth={true}
-              duration={500}
-              offset={-headerHeight}
-              className={`transition-colors duration-300 ${isScrolled ? 'text-black' : 'text-white font-bold'}`}
-            >
-              REZERVACE
-            </Link>
-          </li>
-        </ul>
-      </div>
+      {isMenuOpen && (
+        <div className="md:hidden fixed top-0 left-0 w-full h-full bg-black bg-opacity-75 z-20">
+          <div className="flex flex-col items-center justify-center h-full">
+            {['hero', 'news', 'about', 'team', 'events', 'sponsors', 'contact', 'reservations'].map((section, index) => (
+              <Link
+                key={index}
+                to={section}
+                smooth={true}
+                duration={500}
+                offset={-headerHeight}
+                className="text-white text-xl font-bold mb-6"
+                onClick={toggleMenu}
+              >
+                {section.toUpperCase()}
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

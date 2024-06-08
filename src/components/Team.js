@@ -31,14 +31,14 @@ export const Team = () => {
   }
 
   return (
-    <div className="bg-white py-10">
+    <div className="bg-white py-10 px-4 sm:px-6 lg:px-8">
       <h2 className="text-3xl text-center font-bold text-gray-800 mb-8">Náš tým</h2>
-      <div className="container mx-auto flex flex-wrap justify-center">
+      <div className="container mx-auto flex flex-wrap justify-center gap-6">
         {members.length > 0 &&
           members.map((member, index) => (
             <div
               key={index}
-              className="w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 px-2 mb-8"
+              className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 px-2 mb-8"
             >
               <div className="overflow-hidden h-full bg-gray-200 rounded-lg shadow-lg">
                 <img
@@ -48,14 +48,12 @@ export const Team = () => {
                   alt={`${member.attributes.team_member.first_name} ${member.attributes.team_member.last_name}`}
                   className="w-full h-auto object-cover"
                 />
-                <div className="bg-gray-200 text-center py-2 flex-col flex">
+                <div className="bg-gray-200 text-center py-2 flex flex-col items-center">
                   <p className="text-lg font-semibold text-black">{`${member.attributes.team_member.first_name} ${member.attributes.team_member.last_name}`}</p>
-                  <p className="text-gray-600">
-                    {member.attributes.team_member.role}
-                  </p>
+                  <p className="text-gray-600">{member.attributes.team_member.role}</p>
                   {member.attributes.team_member.phone && (
                     <a
-                      className="flex justify-center items-center gap-1 text-green-700"
+                      className="flex justify-center items-center gap-1 text-gray-700 hover:text-black mt-1"
                       href={`tel:${member.attributes.team_member.phone}`}
                     >
                       <FaPhoneAlt />
@@ -64,7 +62,7 @@ export const Team = () => {
                   )}
                   {member.attributes.team_member.email && (
                     <a
-                      className="flex justify-center items-center gap-1 text-green-700"
+                      className="flex justify-center items-center gap-1 text-gray-700 hover:text-black mt-1"
                       href={`mailto:${member.attributes.team_member.email}`}
                     >
                       <MdEmail />
