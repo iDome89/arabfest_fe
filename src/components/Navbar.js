@@ -28,6 +28,14 @@ export const Navbar = () => {
     };
   }, []);
 
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+  }, [isMenuOpen]);
+
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -38,16 +46,16 @@ export const Navbar = () => {
         isScrolled ? 'bg-white shadow-lg' : 'bg-transparent header-shadow'
       }`}
     >
-      <div className="flex items-center justify-between">
-        <div className="flex items-center">
+      <div className="flex items-center justify-between w-full">
+        <div className="flex items-center justify-between w-full z-50">
+          <a className={`ml-3 text-2xl sm:text-3xl font-bold transition-colors duration-300 ${isScrolled ? 'text-black' : 'text-white'}`}>
+            ARABFEST
+          </a>
           <div className="md:hidden">
             <button onClick={toggleMenu} className={`focus:outline-none transition-colors duration-300 ${isScrolled ? 'text-black' : 'text-white'}`}>
               {isMenuOpen ? <FaTimes size={30} /> : <FaBars size={30} />}
             </button>
           </div>
-          <a className={`ml-3 text-2xl sm:text-3xl font-bold transition-colors duration-300 ${isScrolled ? 'text-black' : 'text-white'}`}>
-            ARABFEST
-          </a>
         </div>
         <div className="hidden md:flex space-x-4 sm:space-x-6">
           {['hero', 'news', 'about', 'team', 'events', 'sponsors', 'contact', 'reservations'].map((section, index) => (
@@ -66,7 +74,7 @@ export const Navbar = () => {
       </div>
       {isMenuOpen && (
         <div className="md:hidden fixed top-0 left-0 w-full h-full bg-black bg-opacity-75 z-20">
-          <div className="flex flex-col items-center justify-center h-full">
+          <div className="flex flex-col w-full items-center justify-center h-full">
             {['hero', 'news', 'about', 'team', 'events', 'sponsors', 'contact', 'reservations'].map((section, index) => (
               <Link
                 key={index}
