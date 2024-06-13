@@ -28,7 +28,7 @@ export const News = () => {
     return <div>Loading...</div>;
   }
 
-  const formatDate = (dateString) => {
+ const formatDate = (dateString) => {
     const date = new Date(dateString);
     const options = {
       day: "numeric",

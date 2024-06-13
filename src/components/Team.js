@@ -10,14 +10,13 @@ export const Team = () => {
     const fetchMembers = async () => {
       try {
         const response = await apiRequest.get(
-          "/teams?sort=order&&pagination[limit]=15&populate=team_member.picture",
+          "/teams?sort=order&populate=team_member.picture",
           {
             headers: {
               Authorization: `Bearer ${process.env.NEXT_PUBLIC_STRAPI_API}`,
             },
           }
         );
-        console.log(response.data)
         setMembers(response.data.data);
       } catch (error) {
         console.error("Error fetching members:", error);

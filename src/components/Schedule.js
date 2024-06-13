@@ -1,13 +1,16 @@
 import { useState, useEffect } from "react";
 import apiRequest from "../utils/apiRequest";
-import { FaCheckCircle } from 'react-icons/fa';
-import { format } from 'date-fns';
+import { FaCheckCircle } from "react-icons/fa";
+import { Speakers } from "./Speakers";
+import { format } from "date-fns";
+import Locations from "./Locations";
+import Accomodations from "./Accomodations";
 
 export const Schedule = () => {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState('primary');
-  const [activeDateTab, setActiveDateTab] = useState('');
+  const [activeTab, setActiveTab] = useState("primary");
+  const [activeDateTab, setActiveDateTab] = useState("");
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -38,12 +41,12 @@ export const Schedule = () => {
 
   const formatDate = (dateTime) => {
     const date = new Date(dateTime);
-    return format(date, 'd.M.yyyy');
+    return format(date, "d.M.yyyy");
   };
 
   const formatDateTime = (dateTime) => {
     const date = new Date(dateTime);
-    return format(date, 'd.M.yyyy - HH:mm');
+    return format(date, "d.M.yyyy - HH:mm");
   };
 
   const groupEventsByDay = (eventList) => {
@@ -61,7 +64,7 @@ export const Schedule = () => {
   const groupedPrimaryEvents = groupEventsByDay(primaryEvents);
 
   useEffect(() => {
-    if (activeTab === 'primary' && primaryEvents.length > 0) {
+    if (activeTab === "primary" && primaryEvents.length > 0) {
       const firstDate = Object.keys(groupedPrimaryEvents)[0];
       setActiveDateTab(firstDate);
     }
@@ -73,17 +76,28 @@ export const Schedule = () => {
 
   const renderPrimaryEventsForDate = (eventsForDate) => {
     if (!eventsForDate) {
-      return <div className="text-center text-gray-500">No events found</div>;
+      return (
+        <div className="text-center text-gray-500">
+          Stále pro vás připravujeme program
+        </div>
+      );
     }
     return eventsForDate.map((event, index) => (
-      <li key={index} className="relative mb-6 p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+      <li
+        key={index}
+        className="relative mb-6 p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
+      >
         <div className="flex items-center">
           <div className="flex-shrink-0 h-10 w-10 rounded-full bg-green-600 flex items-center justify-center">
             <FaCheckCircle className="text-white w-5 h-5" />
           </div>
           <div className="ml-4">
-            <div className="text-lg font-semibold text-gray-800">{event.attributes.name}</div>
-            <div className="text-sm text-gray-500">{formatDateTime(event.attributes.date)}</div>
+            <div className="text-lg font-semibold text-gray-800">
+              {event.attributes.name}
+            </div>
+            <div className="text-sm text-gray-500">
+              {formatDateTime(event.attributes.date)}
+            </div>
           </div>
         </div>
       </li>
@@ -92,17 +106,28 @@ export const Schedule = () => {
 
   const renderSecondaryAndPragueEvents = (eventList) => {
     if (eventList.length === 0) {
-      return <div className="text-center text-gray-500">No events found</div>;
+      return (
+        <div className="text-center text-gray-500">
+          Stále pro vás připravujeme program
+        </div>
+      );
     }
     return eventList.map((event, index) => (
-      <li key={index} className="relative mb-6 p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+      <li
+        key={index}
+        className="relative mb-6 p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
+      >
         <div className="flex items-center">
           <div className="flex-shrink-0 h-10 w-10 rounded-full bg-green-600 flex items-center justify-center">
             <FaCheckCircle className="text-white w-5 h-5" />
           </div>
           <div className="ml-4">
-            <div className="text-lg font-semibold text-gray-800">{event.attributes.name}</div>
-            <div className="text-sm text-gray-500">{formatDateTime(event.attributes.date)}</div>
+            <div className="text-lg font-semibold text-gray-800">
+              {event.attributes.name}
+            </div>
+            <div className="text-sm text-gray-500">
+              {formatDateTime(event.attributes.date)}
+            </div>
           </div>
         </div>
       </li>
@@ -111,65 +136,91 @@ export const Schedule = () => {
 
   return (
     <div className="bg-white py-12 px-4 sm:px-6 lg:px-8">
-      <h2 className="text-3xl text-center font-bold text-gray-800 mb-8">Akce</h2>
-      <div className="max-w-7xl mx-auto">
-        <div role="tablist" className="flex flex-wrap space-x-2 mb-6 justify-center">
+      <h2 className="text-3xl text-center font-bold text-gray-800 mb-8">
+        Akce
+      </h2>
+      <div className="max-w-7xl mx-auto min-h-[300px]">
+        <div
+          role="tablist"
+          className="flex flex-wrap space-x-2 mb-6 justify-center"
+        >
           <button
             role="tab"
-            className={`px-4 py-2 rounded-lg mb-2 ${activeTab === 'primary' ? 'bg-green-500 text-white' : 'bg-gray-200 text-gray-800'} focus:outline-none`}
-            onClick={() => setActiveTab('primary')}
+            className={`px-4 py-2 rounded-lg mb-2 ${
+              activeTab === "primary"
+                ? "bg-green-500 text-white"
+                : "bg-gray-200 text-gray-800"
+            } focus:outline-none`}
+            onClick={() => setActiveTab("primary")}
           >
-            Primary Events
+            Hlavní Program
           </button>
           <button
             role="tab"
-            className={`px-4 py-2 rounded-lg mb-2 ${activeTab === 'secondary' ? 'bg-green-500 text-white' : 'bg-gray-200 text-gray-800'} focus:outline-none`}
-            onClick={() => setActiveTab('secondary')}
+            className={`px-4 py-2 rounded-lg mb-2 ${
+              activeTab === "secondary"
+                ? "bg-green-500 text-white"
+                : "bg-gray-200 text-gray-800"
+            } focus:outline-none`}
+            onClick={() => setActiveTab("secondary")}
           >
-            Secondary Events
+            Doprovodný Program
           </button>
           <button
             role="tab"
-            className={`px-4 py-2 rounded-lg mb-2 ${activeTab === 'prague' ? 'bg-green-500 text-white' : 'bg-gray-200 text-gray-800'} focus:outline-none`}
-            onClick={() => setActiveTab('prague')}
+            className={`px-4 py-2 rounded-lg mb-2 ${
+              activeTab === "prague"
+                ? "bg-green-500 text-white"
+                : "bg-gray-200 text-gray-800"
+            } focus:outline-none`}
+            onClick={() => setActiveTab("prague")}
           >
-            Prague Events
+            Akce v Praze
           </button>
         </div>
 
-        {activeTab === 'primary' && (
+        {activeTab === "primary" && (
           <div>
-            <div role="tablist" className="flex flex-wrap space-x-2 mb-6 justify-center">
+            <div
+              role="tablist"
+              className="flex flex-wrap space-x-2 mb-6 justify-center"
+            >
               {Object.keys(groupedPrimaryEvents).map((date) => (
                 <button
                   key={date}
                   role="tab"
-                  className={`px-4 py-2 rounded-lg mb-2 ${activeDateTab === date ? 'bg-green-500 text-white' : 'bg-gray-200 text-gray-800'} focus:outline-none`}
+                  className={`px-4 py-2 rounded-lg mb-2 ${
+                    activeDateTab === date
+                      ? "bg-green-500 text-white"
+                      : "bg-gray-200 text-gray-800"
+                  } focus:outline-none`}
                   onClick={() => setActiveDateTab(date)}
                 >
                   {date}
                 </button>
               ))}
             </div>
-            <div role="tabpanel">
+            <div className="max-w-2xl m-auto" role="tabpanel">
               {activeDateTab && (
                 <ul className="space-y-4">
-                  {renderPrimaryEventsForDate(groupedPrimaryEvents[activeDateTab])}
+                  {renderPrimaryEventsForDate(
+                    groupedPrimaryEvents[activeDateTab]
+                  )}
                 </ul>
               )}
             </div>
           </div>
         )}
 
-        {activeTab === 'secondary' && (
-          <div role="tabpanel">
+        {activeTab === "secondary" && (
+          <div role="tabpanel" className="max-w-2xl m-auto">
             <ul className="space-y-4">
               {renderSecondaryAndPragueEvents(secondaryEvents)}
             </ul>
           </div>
         )}
 
-        {activeTab === 'prague' && (
+        {activeTab === "prague" && (
           <div role="tabpanel">
             <ul className="space-y-4">
               {renderSecondaryAndPragueEvents(pragueEvents)}
@@ -177,6 +228,9 @@ export const Schedule = () => {
           </div>
         )}
       </div>
+      <Speakers />
+      <Locations />
+      <Accomodations />
     </div>
   );
 };

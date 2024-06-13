@@ -61,12 +61,12 @@ export const Sponsors = () => {
                 />
               </div>
             </a>
-            <div className="flex-grow bg-gray-100 flex items-center justify-between p-4">
-              <a href={sponsor.attributes.url} target="_blank" rel="noopener noreferrer" className="text-gray-700 font-semibold">
+            <div className="grid h-full items-start grid-cols-4 bg-gray-100 flex items-center justify-between p-4">
+              <a href={sponsor.attributes.url} target="_blank" rel="noopener noreferrer" className="text-gray-700 font-semibold col-span-3">
                 {sponsor.attributes.name}
               </a>
               <FaInfoCircle
-                className="text-gray-500 ml-2 cursor-pointer"
+                className="text-gray-500 ml-2 cursor-pointer justify-self-end self-end"
                 onClick={() => handleInfoClick(sponsor)}
               />
             </div>
