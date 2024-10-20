@@ -57,7 +57,7 @@ export const Navbar = () => {
             </button>
           </div>
         </div>
-        <div className="hidden md:flex space-x-4 sm:space-x-6">
+        <div className="hidden md:flex space-x-4 sm:space-x-6 w-full justify-end">
           {['novinky', ' o festivalu', 'tým', 'program', 'partneři', 'kontakt', 'rezervace'].map((section, index) => (
             <Link
               key={index}
