@@ -1,11 +1,8 @@
-import React from 'react';
-
 export const Reservations = () => {
   return (
     <div className="bg-white py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto text-center mb-8">
-        <h1 className="text-3xl font-bold mb-4">Rezervace</h1>
-        <p className="text-lg text-gray-700">Zarezervujte si svoje místo už teď!</p>
+        <h1 className="text-3xl font-bold mb-4">Kontaktní formulář</h1>
       </div>
       <div className="max-w-4xl mx-auto">
         <form className="grid grid-cols-1 md:grid-cols-2 gap-6">

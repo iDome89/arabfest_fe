@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import apiRequest from "../utils/apiRequest";
 import { FaInfoCircle } from "react-icons/fa";
 import SpeakerInfoModal from "./SpeakerInfoModal";
@@ -44,7 +44,7 @@ export const Speakers = () => {
   return (
     <div className="bg-white py-10 px-4 sm:px-6 lg:px-8">
       <h2 className="text-3xl text-center font-bold text-gray-800 mb-8">
-        Přednášející a ůčinckující
+        Hosté
       </h2>
       <div className="container mx-auto flex flex-wrap justify-center gap-6">
         {speakers.length > 0 &&

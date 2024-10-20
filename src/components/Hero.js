@@ -32,10 +32,6 @@ export const Hero = () => {
         backgroundImage: `url(${banner?.attributes.background_image.data.attributes.url || ''})`,
       }}
     >
-      <div className="text-white text-center p-4 sm:p-6 lg:p-8">
-        <h1 className="text-4xl font-bold mb-4">Vítejte na Arabfestu!</h1>
-        <p className="text-lg sm:text-xl max-w-lg mx-auto">Přijďte s námi oslavit kulturu, umění a komunitu.</p>
-      </div>
     </div>
   );
 };
