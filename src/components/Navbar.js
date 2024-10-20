@@ -58,7 +58,7 @@ export const Navbar = () => {
           </div>
         </div>
         <div className="hidden md:flex space-x-4 sm:space-x-6 w-full justify-end">
-          {['novinky', ' o festivalu', 'tým', 'program', 'partneři', 'kontakt', 'rezervace'].map((section, index) => (
+          {['novinky', ' o festivalu', 'tým', 'program', 'partneři', 'kontakt'].map((section, index) => (
             <Link
               key={index}
               to={section}
@@ -75,7 +75,7 @@ export const Navbar = () => {
       {isMenuOpen && (
         <div className="md:hidden fixed top-0 left-0 w-full h-full bg-black bg-opacity-75 z-20">
           <div className="flex flex-col w-full items-center justify-center h-full">
-            {['novinky', 'o festivalu', 'tým', 'program', 'partneři', 'kontakt', 'rezervace'].map((section, index) => (
+            {['novinky', 'o festivalu', 'tým', 'program', 'partneři', 'kontakt'].map((section, index) => (
               <Link
                 key={index}
                 to={section}
