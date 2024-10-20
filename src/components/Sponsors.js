@@ -11,7 +11,7 @@ export const Sponsors = () => {
   useEffect(() => {
     const fetchSponsor = async () => {
       try {
-        const response = await apiRequest.get("/partners?populate=*", {
+        const response = await apiRequest.get("/partners?populate=*&pagination[pageSize]=30&sort=id:asc", {
           headers: {
             Authorization: `Bearer ${process.env.NEXT_PUBLIC_STRAPI_API}`,
           },
