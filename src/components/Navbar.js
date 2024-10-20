@@ -65,7 +65,7 @@ export const Navbar = () => {
               smooth={true}
               duration={500}
               offset={-headerHeight}
-              className={`transition-colors duration-300 ${isScrolled ? 'text-black' : 'text-white font-bold'}`}
+              className={`transition-colors duration-300 text-sm ${isScrolled ? 'text-black' : 'text-white font-bold'}`}
             >
               {section.toUpperCase()}
             </Link>
