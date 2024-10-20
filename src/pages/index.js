@@ -18,7 +18,7 @@ export default function Home() {
       <section>
         <Hero />
       </section>
-      <section id="aktuality">
+      <section id="novinky">
         <News />
       </section>
       <section id="festival">

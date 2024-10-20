@@ -4,7 +4,6 @@ import { FaCheckCircle } from "react-icons/fa";
 import { Speakers } from "./Speakers";
 import { format } from "date-fns";
 import Locations from "./Locations";
-import Accomodations from "./Accomodations";
 
 export const Schedule = () => {
   const [events, setEvents] = useState([]);
@@ -78,7 +77,7 @@ export const Schedule = () => {
     if (!eventsForDate) {
       return (
         <div className="text-center text-gray-500">
-          Stále pro vás připravujeme program
+          Stále pro vás připravujeme program 15. ročníku
         </div>
       );
     }
@@ -108,7 +107,7 @@ export const Schedule = () => {
     if (eventList.length === 0) {
       return (
         <div className="text-center text-gray-500">
-          Stále pro vás připravujeme program
+          Stále pro vás připravujeme program 15. ročníku
         </div>
       );
     }
@@ -201,12 +200,16 @@ export const Schedule = () => {
               ))}
             </div>
             <div className="max-w-2xl m-auto" role="tabpanel">
-              {activeDateTab && (
+              {activeDateTab ? (
                 <ul className="space-y-4">
                   {renderPrimaryEventsForDate(
                     groupedPrimaryEvents[activeDateTab]
                   )}
                 </ul>
+              ) : (
+                <div className="text-center text-gray-500">
+                  Stále pro vás připravujeme novinky program 15. ročníku
+                </div>
               )}
             </div>
           </div>
@@ -230,7 +233,6 @@ export const Schedule = () => {
       </div>
       <Speakers />
       <Locations />
-      <Accomodations />
     </div>
   );
 };

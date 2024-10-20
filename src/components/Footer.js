@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import apiRequest from "../utils/apiRequest";
-import { FaInstagram, FaYoutube, FaFacebook } from "react-icons/fa";
 
 export const Footer = () => {
   const [contact, setContact] = useState(null);
@@ -33,15 +32,6 @@ export const Footer = () => {
         </div>
 
         <div className="flex space-x-6">
-          <a href={contact.attributes.instagram} target="_blank" rel="noopener noreferrer">
-            <FaInstagram className="text-gray-600 hover:text-gray-800" size={30} />
-          </a>
-          <a href={contact.attributes.facebook} target="_blank" rel="noopener noreferrer">
-            <FaFacebook className="text-gray-600 hover:text-gray-800" size={30} />
-          </a>
-          <a href={contact.attributes.youtube} target="_blank" rel="noopener noreferrer">
-            <FaYoutube className="text-gray-600 hover:text-gray-800" size={30} />
-          </a>
         </div>
       </div>
       <div className="container mx-auto mt-8 text-center text-gray-500">

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import apiRequest from "../utils/apiRequest";
 import { FaInfoCircle } from "react-icons/fa";
 import Modal from "./Modal";
@@ -42,9 +42,6 @@ export const Sponsors = () => {
     <div className="bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="text-center mb-12">
         <h2 className="text-3xl font-bold text-gray-800">Partneři</h2>
-        <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
-          Toto jsou naši úžasní sponzoři a partneři, kterým moc děkujeme za spolupráci.
-        </p>
       </div>
       <div className="flex flex-wrap justify-center gap-6">
         {sponsors.map((sponsor, index) => (
