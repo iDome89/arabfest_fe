@@ -21,7 +21,7 @@ export default function Home() {
       <section id="novinky">
         <News />
       </section>
-      <section id="festival">
+      <section id="o festivalu">
         <About />
       </section>
       <section id="tým">
@@ -41,8 +41,6 @@ export default function Home() {
       </section>
       <section id="kontakt">
         <Contact />
-      </section>
-      <section id="rezervace">
         <Reservations />
       </section>
       <Footer />
