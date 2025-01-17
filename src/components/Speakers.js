@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import apiRequest from "../utils/apiRequest";
-import { FaInfoCircle } from "react-icons/fa";
 import SpeakerInfoModal from "./SpeakerInfoModal";
 
 export const Speakers = () => {
@@ -49,7 +48,11 @@ export const Speakers = () => {
       <div className="container mx-auto flex flex-wrap justify-center gap-6">
         {speakers.length > 0 &&
           speakers.map((member, index) => (
-            <div key={index} className="w-[220px] h-[260px] px-2 mb-8">
+            <div
+              key={index}
+              className="w-[220px] h-[260px] px-2 mb-8 cursor-pointer"
+              onClick={() => handleInfoClick(member.attributes.speaker)}
+            >
               <div className="overflow-hidden h-full bg-gray-200 rounded-lg shadow-lg">
                 <img
                   src={member.attributes.speaker.picture.data[0].attributes.url}
@@ -59,10 +62,6 @@ export const Speakers = () => {
                 <div className="bg-gray-200 text-center py-2 flex flex-col items-center">
                   <p className="text-lg flex items-center font-semibold text-black">
                     {`${member.attributes.speaker.first_name} ${member.attributes.speaker.last_name}`}
-                    <FaInfoCircle
-                      className="text-gray-500 ml-2 cursor-pointer"
-                      onClick={() => handleInfoClick(member.attributes.speaker)}
-                    />
                   </p>
                   {member.attributes.speaker.website && (
                     <a
@@ -77,7 +76,13 @@ export const Speakers = () => {
             </div>
           ))}
       </div>
-      {currentSpeaker && <SpeakerInfoModal showModal={showModal} onClose={handleCloseModal} speaker={currentSpeaker}/>}
+      {currentSpeaker && (
+        <SpeakerInfoModal
+          showModal={showModal}
+          onClose={handleCloseModal}
+          speaker={currentSpeaker}
+        />
+      )}
     </div>
   );
 };
