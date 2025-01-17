@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import apiRequest from "../utils/apiRequest";
-import { FaInfoCircle } from "react-icons/fa";
-import Modal from "./Modal";
 
 export const Sponsors = () => {
   const [sponsors, setSponsors] = useState(null);
@@ -58,18 +56,9 @@ export const Sponsors = () => {
                 />
               </div>
             </a>
-            <div className="grid h-full items-start grid-cols-4 bg-gray-100 flex items-center justify-between p-4">
-              <FaInfoCircle
-                className="text-gray-500 ml-2 cursor-pointer justify-self-end self-end"
-                onClick={() => handleInfoClick(sponsor)}
-              />
-            </div>
           </div>
         ))}
       </div>
-      {currentSponsor && (
-        <Modal showModal={showModal} onClose={handleCloseModal} sponsor={currentSponsor} />
-      )}
     </div>
   );
 };
