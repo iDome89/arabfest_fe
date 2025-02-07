@@ -152,7 +152,7 @@ export const Schedule = () => {
             } focus:outline-none`}
             onClick={() => setActiveTab("primary")}
           >
-            Hlavní Program
+            Hlavní program
           </button>
           <button
             role="tab"
@@ -163,7 +163,7 @@ export const Schedule = () => {
             } focus:outline-none`}
             onClick={() => setActiveTab("secondary")}
           >
-            Doprovodný Program
+            Doprovodný program
           </button>
           <button
             role="tab"
