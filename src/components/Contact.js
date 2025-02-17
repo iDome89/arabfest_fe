@@ -3,7 +3,6 @@ import { FaEnvelope, FaFacebook, FaInstagram, FaYoutube } from "react-icons/fa";
 
 const Contact = () => {
   const { color } = useGetAll();
-  console.log(color);
   return (
     <div className="bg-white py-12 px-6 text-center">
       <div className="flex justify-center items-center space-x-12 mb-8">
