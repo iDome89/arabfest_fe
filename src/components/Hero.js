@@ -1,40 +1,24 @@
-import React, { useEffect, useState } from 'react';
-import apiRequest from '../utils/apiRequest';
+import { useGetAll } from "@/features/useGetAll";
+import { useState } from "react";
 
 export const Hero = () => {
-  const [banner, setBanner] = useState(null);
 
-  useEffect(() => {
-    const fetchBanner = async () => {
-      try {
-        const response = await apiRequest.get('/banner?populate=background_image', {
-          headers: {
-            Authorization: `Bearer ${process.env.NEXT_PUBLIC_STRAPI_API}`,
-          },
-        });
-        setBanner(response.data.data);
-      } catch (error) {
-        console.error('Error fetching banner:', error);
-      }
-    };
+  const [isMobile, setIsMobile] = useState(false);
 
-    fetchBanner();
-  }, []);
+  const { banner } = useGetAll();
 
-  if (!banner) {
-    return <div>Loading...</div>;
-  }
+  const desktopImage = banner?.attributes?.background_image?.data?.attributes?.url || "";
+  const mobileImage = banner?.attributes?.mobile_image?.data?.attributes?.url || desktopImage; // Use mobile image if available
 
   return (
-    <div
-      className="hero h-screen bg-cover bg-center flex items-center justify-center"
-      style={{
-        backgroundImage: `url(${banner?.attributes.background_image.data.attributes.url || ''})`,
-      }}
-    >
+    <div className="relative w-full h-screen overflow-hidden">
+      <img
+        src={isMobile ? mobileImage : desktopImage}
+        alt="Banner"
+        className="w-full h-full object-cover"
+      />
     </div>
   );
 };
 
-
-
+export default Hero;

@@ -1,28 +1,7 @@
-import { useEffect, useState } from "react";
-import apiRequest from "../utils/apiRequest";
+import { useGetAll } from "@/features/useGetAll";
 
 export const Footer = () => {
-  const [contact, setContact] = useState(null);
-
-  useEffect(() => {
-    const fetchContacts = async () => {
-      try {
-        const response = await apiRequest.get("/contact?populate=*", {
-          headers: {
-            Authorization: `Bearer ${process.env.NEXT_PUBLIC_STRAPI_API}`,
-          },
-        });
-        setContact(response.data.data);
-      } catch (error) {
-        console.error("Error fetching contact info:", error);
-      }
-    };
-    fetchContacts();
-  }, []);
-
-  if (!contact) {
-    return <div>Loading...</div>;
-  }
+const {contact} = useGetAll();
 
   return (
     <footer className="bg-white py-8 border-t">
@@ -31,12 +10,13 @@ export const Footer = () => {
           <h2 className="text-3xl font-bold text-black">ARABFEST</h2>
         </div>
 
-        <div className="flex space-x-6">
-        </div>
+        <div className="flex space-x-6"></div>
       </div>
       <div className="container mx-auto mt-8 text-center text-gray-500">
         <h3 className="text-lg">{contact.attributes.full_name}</h3>
-        <h3 className="text-lg">{contact.attributes.email}</h3>
+        <a href="mailto:kontakt@arabfest.cz">
+          <h3 className="text-lg">{contact.attributes.email}</h3>
+        </a>
         <p className="text-sm">© 2024 Arabfest. All rights reserved.</p>
       </div>
     </footer>

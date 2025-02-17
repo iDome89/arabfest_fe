@@ -1,5 +1,3 @@
-import React from 'react';
-
 const Modal = ({ showModal, onClose, sponsor }) => {
   if (!showModal) return null;
 
@@ -17,12 +15,12 @@ const Modal = ({ showModal, onClose, sponsor }) => {
         </p>
         <button
           onClick={onClose}
-          className="absolute top-2 right-2 text-gray-600 hover:text-gray-900"
+          className="cursor-pointer absolute top-2 right-2 text-gray-600 hover:text-gray-900"
         >
           ✕
         </button>
       </div>
-      <div className="modal-backdrop fixed inset-0" onClick={onClose}></div>
+      <div className="cursor-pointer modal-backdrop fixed inset-0" onClick={onClose}></div>
     </div>
   );
 };

@@ -1,11 +1,10 @@
-import { useEffect, useState } from "react";
+import { useGetAll } from "@/features/useGetAll";
 import ReactMarkdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
-import apiRequest from "../utils/apiRequest";
 
 export const MediaArticles = () => {
-  const [articles, setArticles] = useState([]);
+  const { mediaArticles: articles, color } = useGetAll();
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -23,28 +22,8 @@ export const MediaArticles = () => {
     return `${formattedDate} ${formattedTime}`;
   };
 
-  useEffect(() => {
-    const fetchArticles = async () => {
-      try {
-        const response = await apiRequest.get(
-          "/media-articles?sort=id&populate=*",
-          {
-            headers: {
-              Authorization: `Bearer ${process.env.NEXT_PUBLIC_STRAPI_API}`,
-            },
-          }
-        );
-
-        setArticles(response.data.data);
-      } catch (error) {
-        console.error("Error fetching articles:", error);
-      }
-    };
-    fetchArticles();
-  }, []);
-
-  if (!articles) {
-    return <div>Loading...</div>;
+  if (!articles || articles.length === 0) {
+    return null;
   }
   return (
     <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4 sm:px-6 lg:px-8">
@@ -56,17 +35,10 @@ export const MediaArticles = () => {
             key={index}
             className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
           >
-            <h3 className="text-xl font-semibold text-[#22c55f] mb-2">
-              {article.attributes.title}
+            <h3 className="text-xl font-semibold mb-4" style={{color:color}}>
+              <a href={article.attributes.portal}>{article.attributes.title}</a>
             </h3>
-            <div className="flex items-center col-span-4 my-4 gap-[5px]">
-                  <p className="text-sm text-gray-700 font-semibold">
-                    Na portálu: 
-                  </p>
-                  <a href={article.attributes.portal} className="text-xs text-gray-700 hover:text-black">
-                    {article.attributes.portal}
-                  </a>
-                </div>
+
             <div className="prose prose-sm max-w-none">
               <ReactMarkdown
                 children={content}

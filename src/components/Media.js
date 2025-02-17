@@ -1,13 +1,15 @@
 import { useState } from "react";
 import { MediaArticles } from "./MediaArticles";
 import { PressReleases } from "./PressReleases";
+import { useGetAll } from "@/features/useGetAll";
 
 export const Media = () => {
   const [activeTab, setActiveTab] = useState("articles");
+  const {color} = useGetAll();
   return (
     <div className="bg-white py-12 px-4 sm:px-6 lg:px-8">
       <h2 className="text-3xl text-center font-bold text-gray-800 mb-8">
-        Media
+        Média
       </h2>
       <div className="max-w-7xl mx-auto min-h-[300px]">
         <div
@@ -16,22 +18,23 @@ export const Media = () => {
         >
           <button
             role="tab"
-            className={`px-4 py-2 rounded-lg mb-2 ${
-              activeTab === "articles"
-                ? "bg-green-500 text-white"
-                : "bg-gray-200 text-gray-800"
-            } focus:outline-none`}
+            className={`cursor-pointer px-4 py-2 rounded-lg mb-2 focus:outline-none`}
+            style={{
+              backgroundColor: activeTab === "articles" ? color : "#E5E7EB",
+              color: activeTab === "articles" ? "white" : "#1F2937",
+            }}
             onClick={() => setActiveTab("articles")}
           >
             Napsali o nás
           </button>
           <button
             role="tab"
-            className={`px-4 py-2 rounded-lg mb-2 ${
-              activeTab === "press-releases"
-                ? "bg-green-500 text-white"
-                : "bg-gray-200 text-gray-800"
-            } focus:outline-none`}
+            className={`cursor-pointer px-4 py-2 rounded-lg mb-2 focus:outline-none`}
+            style={{
+              backgroundColor:
+                activeTab === "press-releases" ? color : "#E5E7EB",
+              color: activeTab === "press-releases" ? "white" : "#1F2937",
+            }}
             onClick={() => setActiveTab("press-releases")}
           >
             Tiskové zprávy

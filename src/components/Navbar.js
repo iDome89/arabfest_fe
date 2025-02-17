@@ -48,11 +48,11 @@ export const Navbar = () => {
     >
       <div className="flex items-center justify-between w-full">
         <div className="flex items-center justify-between w-full z-50">
-          <a className={`ml-3 text-2xl sm:text-3xl font-bold transition-colors duration-300 ${isScrolled ? 'text-black' : 'text-white'}`}>
+          <a className={`cursor-pointer ml-3 text-2xl sm:text-3xl font-bold transition-colors duration-300 ${isScrolled ? 'text-black' : 'text-white'}`}>
             ARABFEST
           </a>
           <div className="md:hidden">
-            <button onClick={toggleMenu} className={`focus:outline-none transition-colors duration-300 ${isScrolled ? 'text-black' : 'text-white'}`}>
+            <button onClick={toggleMenu} className={`cursor-pointer focus:outline-none transition-colors duration-300 ${isScrolled ? 'text-black' : 'text-white'}`}>
               {isMenuOpen ? <FaTimes size={30} /> : <FaBars size={30} />}
             </button>
           </div>
@@ -65,7 +65,7 @@ export const Navbar = () => {
               smooth={true}
               duration={500}
               offset={-headerHeight}
-              className={`transition-colors duration-300 text-sm ${isScrolled ? 'text-black' : 'text-white font-bold'}`}
+              className={`cursor-pointer transition-colors duration-300 text-sm ${isScrolled ? 'text-black' : 'text-white font-bold'}`}
             >
               {section.toUpperCase()}
             </Link>
@@ -82,7 +82,7 @@ export const Navbar = () => {
                 smooth={true}
                 duration={500}
                 offset={-headerHeight}
-                className="text-white text-xl font-bold mb-6"
+                className="cursor-pointer text-white text-xl font-bold mb-6"
                 onClick={toggleMenu}
               >
                 {section.toUpperCase()}

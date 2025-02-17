@@ -1,32 +1,15 @@
 import { useState, useEffect } from "react";
-import apiRequest from "../utils/apiRequest";
 import { FaCheckCircle } from "react-icons/fa";
 import { Speakers } from "./Speakers";
 import { format } from "date-fns";
 import Locations from "./Locations";
+import { useGetAll } from "@/features/useGetAll";
 
 export const Schedule = () => {
-  const [events, setEvents] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState("primary");
   const [activeDateTab, setActiveDateTab] = useState("");
 
-  useEffect(() => {
-    const fetchEvents = async () => {
-      try {
-        const response = await apiRequest.get("/events?populate=*", {
-          headers: {
-            Authorization: `Bearer ${process.env.NEXT_PUBLIC_STRAPI_API}`,
-          },
-        });
-        setEvents(response.data.data);
-        setLoading(false);
-      } catch (error) {
-        setLoading(false);
-      }
-    };
-    fetchEvents();
-  }, []);
+  const { events, color } = useGetAll();
 
   const primaryEvents = events.filter(
     (event) => event.attributes.event_type === "primary"
@@ -69,10 +52,6 @@ export const Schedule = () => {
     }
   }, [activeTab, events]);
 
-  if (loading) {
-    return <div className="text-center text-gray-500">Loading...</div>;
-  }
-
   const renderPrimaryEventsForDate = (eventsForDate) => {
     if (!eventsForDate) {
       return (
@@ -87,7 +66,10 @@ export const Schedule = () => {
         className="relative mb-6 p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
       >
         <div className="flex items-center">
-          <div className="flex-shrink-0 h-10 w-10 rounded-full bg-green-600 flex items-center justify-center">
+          <div
+            className="flex-shrink-0 h-10 w-10 rounded-full flex items-center justify-center"
+            style={{ backgroundColor: color }}
+          >
             <FaCheckCircle className="text-white w-5 h-5" />
           </div>
           <div className="ml-4">
@@ -117,7 +99,10 @@ export const Schedule = () => {
         className="relative mb-6 p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
       >
         <div className="flex items-center">
-          <div className="flex-shrink-0 h-10 w-10 rounded-full bg-green-600 flex items-center justify-center">
+          <div
+            className="flex-shrink-0 h-10 w-10 rounded-full flex items-center justify-center"
+            style={{ backgroundColor: color }}
+          >
             <FaCheckCircle className="text-white w-5 h-5" />
           </div>
           <div className="ml-4">
@@ -145,33 +130,33 @@ export const Schedule = () => {
         >
           <button
             role="tab"
-            className={`px-4 py-2 rounded-lg mb-2 ${
-              activeTab === "primary"
-                ? "bg-green-500 text-white"
-                : "bg-gray-200 text-gray-800"
-            } focus:outline-none`}
+            className={`cursor-pointer px-4 py-2 rounded-lg mb-2 focus:outline-none`}
+            style={{
+              backgroundColor: activeTab === "primary" ? color : "#E5E7EB",
+              color: activeTab === "primary" ? "white" : "#1F2937",
+            }}
             onClick={() => setActiveTab("primary")}
           >
             Hlavní program
           </button>
           <button
             role="tab"
-            className={`px-4 py-2 rounded-lg mb-2 ${
-              activeTab === "secondary"
-                ? "bg-green-500 text-white"
-                : "bg-gray-200 text-gray-800"
-            } focus:outline-none`}
+            className={`cursor-pointer px-4 py-2 rounded-lg mb-2 focus:outline-none`}
+            style={{
+              backgroundColor: activeTab === "secondary" ? color : "#E5E7EB",
+              color: activeTab === "secondary" ? "white" : "#1F2937",
+            }}
             onClick={() => setActiveTab("secondary")}
           >
             Doprovodný program
           </button>
           <button
             role="tab"
-            className={`px-4 py-2 rounded-lg mb-2 ${
-              activeTab === "prague"
-                ? "bg-green-500 text-white"
-                : "bg-gray-200 text-gray-800"
-            } focus:outline-none`}
+            className={`cursor-pointer px-4 py-2 rounded-lg mb-2 focus:outline-none`}
+            style={{
+              backgroundColor: activeTab === "prague" ? color : "#E5E7EB",
+              color: activeTab === "prague" ? "white" : "#1F2937",
+            }}
             onClick={() => setActiveTab("prague")}
           >
             Akce v Praze
@@ -188,7 +173,7 @@ export const Schedule = () => {
                 <button
                   key={date}
                   role="tab"
-                  className={`px-4 py-2 rounded-lg mb-2 ${
+                  className={`cursor-pointer px-4 py-2 rounded-lg mb-2 ${
                     activeDateTab === date
                       ? "bg-green-500 text-white"
                       : "bg-gray-200 text-gray-800"

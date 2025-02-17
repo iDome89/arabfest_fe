@@ -10,8 +10,14 @@ import { Media } from "../components/Media";
 import { Team } from "../components/Team";
 import Contact from "@/components/Contact";
 import { Gallery } from "@/components/Gallery";
+import { useGetAll } from "@/features/useGetAll";
+import SkeletonLayout from "@/components/Skeleton";
 
 export default function Home() {
+  const { isLoading} = useGetAll()
+  if (isLoading) {
+    return  <SkeletonLayout />
+  }
   return (
     <main className="flex min-h-screen flex-col bg-transparent">
       <Navbar />
@@ -24,14 +30,14 @@ export default function Home() {
       <section id="o festivalu">
         <About />
       </section>
-      <section id="tým">
-        <Team />
-      </section>
       <section id="program">
         <Schedule />
       </section>
       <section id="galerie">
         <Gallery />
+      </section>
+      <section id="tým">
+        <Team />
       </section>
       <section id="media">
         <Media />

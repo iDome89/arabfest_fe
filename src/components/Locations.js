@@ -1,29 +1,10 @@
-import React, { useEffect, useState } from "react";
-import apiRequest from "../utils/apiRequest";
 import { HiMapPin } from "react-icons/hi2";
+import { useGetAll } from "@/features/useGetAll";
 
 export const Locations = () => {
-  const [locations, setLocations] = useState(null);
-
-  useEffect(() => {
-    const fetchLocations = async () => {
-      try {
-        const response = await apiRequest.get("/locations?sort=id&populate=*", {
-          headers: {
-            Authorization: `Bearer ${process.env.NEXT_PUBLIC_STRAPI_API}`,
-          },
-        });
-
-        setLocations(response.data.data);
-      } catch (error) {
-        console.error("Error fetching Locations:", error);
-      }
-    };
-    fetchLocations();
-  }, []);
-
-  if (!locations) {
-    return <div>Loading...</div>;
+  const { locations } = useGetAll();
+  if (!locations || !locations?.length > 0) {
+    return null;
   }
   return (
     <div className="bg-white py-10 px-4 sm:px-6 lg:px-8">

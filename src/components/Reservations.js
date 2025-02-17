@@ -1,4 +1,7 @@
+import { useGetAll } from "@/features/useGetAll";
+
 export const Reservations = () => {
+  const { color } = useGetAll();
   return (
     <div className="bg-white py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto text-center mb-8">
@@ -33,7 +36,11 @@ export const Reservations = () => {
           <div className="col-span-1 md:col-span-2 text-right">
             <button
               type="submit"
-              className="bg-green-600 text-white py-2 px-6 rounded-md hover:bg-green-600 transition-colors duration-300"
+              className="text-white py-2 px-6 rounded-md transition-colors duration-300"
+              style={{
+                backgroundColor: color,
+                hover: { backgroundColor: color },
+              }}
             >
               POSLAT ZPRÁVU
             </button>

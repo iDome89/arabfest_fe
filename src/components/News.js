@@ -1,34 +1,18 @@
-import { useEffect, useState } from "react";
-import apiRequest from "../utils/apiRequest";
+import { useState } from "react";
 import ReactMarkdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
+import { useGetAll } from "@/features/useGetAll";
 
 export const News = () => {
-  const [news, setNews] = useState(null);
   const [expandedIndex, setExpandedIndex] = useState(null);
 
-  useEffect(() => {
-    const fetchNews = async () => {
-      try {
-        const response = await apiRequest.get("/news?populate=*", {
-          headers: {
-            Authorization: `Bearer ${process.env.NEXT_PUBLIC_STRAPI_API}`,
-          },
-        });
-        setNews(response.data.data);
-      } catch (error) {
-        console.error("Error fetching news:", error);
-      }
-    };
-    fetchNews();
-  }, []);
-
-  if (!news) {
-    return <div>Loading...</div>;
+  const { news } = useGetAll();
+  if (!news || news.length === 0) {
+    return null;
   }
 
- const formatDate = (dateString) => {
+  const formatDate = (dateString) => {
     const date = new Date(dateString);
     const options = {
       day: "numeric",
@@ -49,8 +33,6 @@ export const News = () => {
   };
 
   return (
-  <>
-    {news.length > 0 ? (
     <div className="bg-gray-100 py-10">
       <h2 className="text-3xl text-center font-bold text-gray-800 mb-8">
         Novinky
@@ -93,7 +75,7 @@ export const News = () => {
               </div>
               <button
                 onClick={() => toggleExpand(index)}
-                className="mt-4 text-blue-500 hover:underline"
+                className="cursor-pointer mt-4 text-blue-500 hover:underline"
               >
                 {isExpanded ? "Méně" : "Více"}
               </button>
@@ -101,7 +83,6 @@ export const News = () => {
           );
         })}
       </div>
-    </div>) : null}
-    </>
+    </div>
   );
 };

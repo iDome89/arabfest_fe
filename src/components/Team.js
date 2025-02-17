@@ -1,37 +1,19 @@
-import React, { useEffect, useState } from "react";
-import apiRequest from "../utils/apiRequest";
 import { FaPhoneAlt } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
+import { useGetAll } from "@/features/useGetAll";
 
 export const Team = () => {
-  const [members, setMembers] = useState(null);
+  const { team: members } = useGetAll();
 
-  useEffect(() => {
-    const fetchMembers = async () => {
-      try {
-        const response = await apiRequest.get(
-          "/teams?sort=order&populate=team_member.picture",
-          {
-            headers: {
-              Authorization: `Bearer ${process.env.NEXT_PUBLIC_STRAPI_API}`,
-            },
-          }
-        );
-        setMembers(response.data.data);
-      } catch (error) {
-        console.error("Error fetching members:", error);
-      }
-    };
-    fetchMembers();
-  }, []);
-
-  if (!members) {
-    return <div>Loading...</div>;
+  if (!members || members.length === 0) {
+    return null;
   }
 
   return (
     <div className="bg-white py-10 px-4 sm:px-6 lg:px-8">
-      <h2 className="text-3xl text-center font-bold text-gray-800 mb-8">Náš tým</h2>
+      <h2 className="text-3xl text-center font-bold text-gray-800 mb-8">
+        Náš tým
+      </h2>
       <div className="container mx-auto flex flex-wrap justify-center gap-6">
         {members.length > 0 &&
           members.map((member, index) => (
@@ -49,7 +31,9 @@ export const Team = () => {
                 />
                 <div className="bg-gray-200 text-center py-2 flex flex-col items-center">
                   <p className="text-lg font-semibold text-black">{`${member.attributes.team_member.first_name} ${member.attributes.team_member.last_name}`}</p>
-                  <p className="text-gray-600">{member.attributes.team_member.role}</p>
+                  <p className="text-gray-600">
+                    {member.attributes.team_member.role}
+                  </p>
                   {member.attributes.team_member.phone && (
                     <a
                       className="flex justify-center items-center gap-1 text-gray-700 hover:text-black mt-1"
