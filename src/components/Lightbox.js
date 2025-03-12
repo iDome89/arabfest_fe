@@ -7,7 +7,7 @@ const Lightbox = ({ isOpen, src, onClose, onNext, onPrev, photographerName, phot
         {/* Close Button */}
         <button 
           onClick={onClose} 
-          className="cursor-pointer absolute top-4 right-4 text-white text-4xl"
+          className="cursor-pointer absolute top-[-5px] right-4 text-white text-4xl"
         >
           &times;
         </button>
@@ -17,7 +17,7 @@ const Lightbox = ({ isOpen, src, onClose, onNext, onPrev, photographerName, phot
           <img 
             src={src} 
             alt="Lightbox" 
-            className="max-w-full max-h-full object-contain"
+            className="max-w-[80%] max-h-[80%] object-contain"
           />
             {photographerName && <a 
             href={photographerUrl} 

@@ -1,13 +1,27 @@
 import { useState, useEffect } from "react";
 import { FaCheckCircle } from "react-icons/fa";
+import { motion, AnimatePresence } from "framer-motion";
 import { Speakers } from "./Speakers";
 import { format } from "date-fns";
 import Locations from "./Locations";
+import ReactMarkdown from "react-markdown";
+import rehypeRaw from "rehype-raw";
+import remarkGfm from "remark-gfm";
+import remarkBreaks from "remark-breaks";
 import { useGetAll } from "@/features/useGetAll";
 
 export const Schedule = () => {
   const [activeTab, setActiveTab] = useState("primary");
   const [activeDateTab, setActiveDateTab] = useState("");
+  const [currentEvent, setCurrentEvent] = useState(null);
+
+  const toggleEvent = (event) => {
+    if (currentEvent === event) {
+      setCurrentEvent(null);
+    } else {
+      setCurrentEvent(event);
+    }
+  };
 
   const { events, color } = useGetAll();
 
@@ -44,13 +58,33 @@ export const Schedule = () => {
   };
 
   const groupedPrimaryEvents = groupEventsByDay(primaryEvents);
-
   useEffect(() => {
     if (activeTab === "primary" && primaryEvents.length > 0) {
       const firstDate = Object.keys(groupedPrimaryEvents)[0];
       setActiveDateTab(firstDate);
     }
   }, [activeTab, events]);
+
+  // Animation variants for Framer Motion
+  const descriptionVariants = {
+    hidden: { opacity: 0, height: 0, overflow: "hidden" },
+    visible: { 
+      opacity: 1, 
+      height: "auto", 
+      transition: { 
+        duration: 0.1,
+        ease: "easeInOut"
+      }
+    },
+    exit: { 
+      opacity: 0, 
+      height: 0,
+      transition: { 
+        duration: 0.1,
+        ease: "easeInOut"
+      }
+    }
+  };
 
   const renderPrimaryEventsForDate = (eventsForDate) => {
     if (!eventsForDate) {
@@ -62,12 +96,13 @@ export const Schedule = () => {
     }
     return eventsForDate.map((event, index) => (
       <li
+        onClick={() => toggleEvent(event.id)}
         key={index}
-        className="relative mb-6 p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
+        className=" cursor-pointer relative mb-6 p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
       >
-        <div className="flex items-center">
+        <div className="flex items-start">
           <div
-            className="flex-shrink-0 h-10 w-10 rounded-full flex items-center justify-center"
+            className="flex-shrink-0 h-10 w-10 rounded-full mt-4 flex items-center justify-center"
             style={{ backgroundColor: color }}
           >
             <FaCheckCircle className="text-white w-5 h-5" />
@@ -79,6 +114,45 @@ export const Schedule = () => {
             <div className="text-sm text-gray-500">
               {formatDateTime(event.attributes.date)}
             </div>
+            <p className="text-sm text-gray-800 font-semibold">
+              Cena: {event.attributes.entry_price}
+            </p>
+            <a
+              style={{ color: color }}
+              href={event.attributes.location_url ?? ""}
+              target="_blank"
+            >
+              {event.attributes.location}
+            </a>
+            <AnimatePresence>
+              {event.id === currentEvent && (
+                <motion.div
+                  className="relative py-4"
+                  initial="hidden"
+                  animate="visible"
+                  exit="exit"
+                  variants={descriptionVariants}
+                >
+                  <ReactMarkdown
+                    className="prose prose-lg whitespace-pre-line text-gray-800"
+                    rehypePlugins={[rehypeRaw]}
+                    remarkPlugins={[remarkGfm, remarkBreaks]}
+                    components={{
+                      a: ({ node, ...props }) => (
+                        <a
+                          {...props}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-blue-500 hover:underline"
+                        />
+                      ),
+                    }}
+                  >
+                    {event.attributes.description}
+                  </ReactMarkdown>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </div>
       </li>
@@ -95,12 +169,13 @@ export const Schedule = () => {
     }
     return eventList.map((event, index) => (
       <li
+        onClick={() => toggleEvent(event.id)}
         key={index}
-        className="relative mb-6 p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
+        className=" cursor-pointer relative mb-6 p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
       >
-        <div className="flex items-center">
+        <div className="flex items-start">
           <div
-            className="flex-shrink-0 h-10 w-10 rounded-full flex items-center justify-center"
+            className="flex-shrink-0 h-10 w-10 rounded-full mt-4 flex items-center justify-center"
             style={{ backgroundColor: color }}
           >
             <FaCheckCircle className="text-white w-5 h-5" />
@@ -112,6 +187,45 @@ export const Schedule = () => {
             <div className="text-sm text-gray-500">
               {formatDateTime(event.attributes.date)}
             </div>
+            <p className="text-sm text-gray-800 font-semibold">
+              Cena: {event.attributes.entry_price}
+            </p>
+            <a
+              style={{ color: color }}
+              href={event.attributes.location_url ?? ""}
+              target="_blank"
+            >
+              {event.attributes.location}
+            </a>
+            <AnimatePresence>
+              {event.id === currentEvent && (
+                <motion.div
+                  className="relative py-4"
+                  initial="hidden"
+                  animate="visible"
+                  exit="exit"
+                  variants={descriptionVariants}
+                >
+                  <ReactMarkdown
+                    className="prose prose-lg whitespace-pre-line text-gray-800"
+                    rehypePlugins={[rehypeRaw]}
+                    remarkPlugins={[remarkGfm, remarkBreaks]}
+                    components={{
+                      a: ({ node, ...props }) => (
+                        <a
+                          {...props}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-blue-500 hover:underline"
+                        />
+                      ),
+                    }}
+                  >
+                    {event.attributes.description}
+                  </ReactMarkdown>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </div>
       </li>
@@ -184,7 +298,7 @@ export const Schedule = () => {
                 </button>
               ))}
             </div>
-            <div className="max-w-2xl m-auto" role="tabpanel">
+            <div className="max-w-xl m-auto" role="tabpanel">
               {activeDateTab ? (
                 <ul className="space-y-4">
                   {renderPrimaryEventsForDate(

@@ -53,12 +53,12 @@ export const Gallery = () => {
             <div
               key={index}
               onClick={() => handleImageClick(index)}
-              className="cursor-pointer w-full  sm:w-[300px] bg-white shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition-transform duration-300 relative flex flex-col"
+              className="cursor-pointer w-full sm:max-w-[220px] bg-white shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition-transform duration-300 relative flex flex-col"
             >
               <img
                 src={category.thumbnail.data.attributes.url}
                 alt={category.name}
-                className="max-h-full max-w-full object-contain"
+                className="h-[200px] max-w-full object-cover"
               />
             </div>
           ))}
