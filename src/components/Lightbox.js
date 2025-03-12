@@ -7,7 +7,7 @@ const Lightbox = ({ isOpen, src, onClose, onNext, onPrev, photographerName, phot
         {/* Close Button */}
         <button 
           onClick={onClose} 
-          className="cursor-pointer absolute top-[-5px] right-4 text-white text-4xl"
+          className="cursor-pointer absolute top-[-5px] right-2 text-white text-4xl"
         >
           &times;
         </button>
