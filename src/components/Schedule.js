@@ -59,7 +59,13 @@ export const Schedule = () => {
   const groupedPrimaryEvents = groupEventsByDay(primaryEvents);
   useEffect(() => {
     if (activeTab === "primary" && primaryEvents.length > 0) {
-      const firstDate = Object.keys(groupedPrimaryEvents)[0];
+      // Sort dates chronologically and get the first one
+      const sortedDates = Object.keys(groupedPrimaryEvents).sort((a, b) => {
+        const dateA = new Date(a.split('.').reverse().join('-'));
+        const dateB = new Date(b.split('.').reverse().join('-'));
+        return dateA - dateB;
+      });
+      const firstDate = sortedDates[0];
       setActiveDateTab(firstDate);
     }
   }, [activeTab, events]);
@@ -266,20 +272,27 @@ export const Schedule = () => {
               role="tablist"
               className="flex flex-wrap space-x-2 mb-6 justify-center"
             >
-              {Object.keys(groupedPrimaryEvents).map((date) => (
-                <button
-                  key={date}
-                  role="tab"
-                  className={`cursor-pointer px-4 py-2 rounded-lg mb-2 focus:outline-none`}
-                  style={{
-                    backgroundColor: activeDateTab === date ? color : "#E5E7EB",
-                    color: activeDateTab === date ? "white" : "#1F2937",
-                  }}
-                  onClick={() => setActiveDateTab(date)}
-                >
-                  {date}
-                </button>
-              ))}
+              {Object.keys(groupedPrimaryEvents)
+                .sort((a, b) => {
+                  // Convert strings back to Date objects for proper comparison
+                  const dateA = new Date(a.split('.').reverse().join('-'));
+                  const dateB = new Date(b.split('.').reverse().join('-'));
+                  return dateA - dateB;
+                })
+                .map((date) => (
+                  <button
+                    key={date}
+                    role="tab"
+                    className={`cursor-pointer px-4 py-2 rounded-lg mb-2 focus:outline-none`}
+                    style={{
+                      backgroundColor: activeDateTab === date ? color : "#E5E7EB",
+                      color: activeDateTab === date ? "white" : "#1F2937",
+                    }}
+                    onClick={() => setActiveDateTab(date)}
+                  >
+                    {date}
+                  </button>
+                ))}
             </div>
             <div className="max-w-xl m-auto" role="tabpanel">
               {activeDateTab ? (
