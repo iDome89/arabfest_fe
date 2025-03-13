@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { FaCheckCircle } from "react-icons/fa";
-import { motion, AnimatePresence } from "framer-motion";
 import { Speakers } from "./Speakers";
 import { format } from "date-fns";
 import Locations from "./Locations";
@@ -9,6 +8,7 @@ import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
 import remarkBreaks from "remark-breaks";
 import { useGetAll } from "@/features/useGetAll";
+import Goout from "@/features/Goout";
 
 export const Schedule = () => {
   const [activeTab, setActiveTab] = useState("primary");
@@ -22,7 +22,6 @@ export const Schedule = () => {
       setCurrentEvent(event);
     }
   };
-
   const { events, color } = useGetAll();
 
   const primaryEvents = events.filter(
@@ -68,22 +67,22 @@ export const Schedule = () => {
   // Animation variants for Framer Motion
   const descriptionVariants = {
     hidden: { opacity: 0, height: 0, overflow: "hidden" },
-    visible: { 
-      opacity: 1, 
-      height: "auto", 
-      transition: { 
+    visible: {
+      opacity: 1,
+      height: "auto",
+      transition: {
         duration: 0.1,
-        ease: "easeInOut"
-      }
+        ease: "easeInOut",
+      },
     },
-    exit: { 
-      opacity: 0, 
+    exit: {
+      opacity: 0,
       height: 0,
-      transition: { 
+      transition: {
         duration: 0.1,
-        ease: "easeInOut"
-      }
-    }
+        ease: "easeInOut",
+      },
+    },
   };
 
   const renderPrimaryEventsForDate = (eventsForDate) => {
@@ -114,9 +113,11 @@ export const Schedule = () => {
             <div className="text-sm text-gray-500">
               {formatDateTime(event.attributes.date)}
             </div>
-            <p className="text-sm text-gray-800 font-semibold">
-              Cena: {event.attributes.entry_price}
-            </p>
+            {event.attributes.entry_price && (
+              <p className="text-sm text-gray-800 font-semibold flex items-center">
+                Cena: {event.attributes.entry_price} {event.attributes.goout && <a href={event.attributes.goout}><Goout /></a>}
+              </p>
+            )}
             <a
               style={{ color: color }}
               href={event.attributes.location_url ?? ""}
@@ -124,35 +125,26 @@ export const Schedule = () => {
             >
               {event.attributes.location}
             </a>
-            <AnimatePresence>
-              {event.id === currentEvent && (
-                <motion.div
-                  className="relative py-4"
-                  initial="hidden"
-                  animate="visible"
-                  exit="exit"
-                  variants={descriptionVariants}
-                >
-                  <ReactMarkdown
-                    className="prose prose-lg whitespace-pre-line text-gray-800"
-                    rehypePlugins={[rehypeRaw]}
-                    remarkPlugins={[remarkGfm, remarkBreaks]}
-                    components={{
-                      a: ({ node, ...props }) => (
-                        <a
-                          {...props}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-blue-500 hover:underline"
-                        />
-                      ),
-                    }}
-                  >
-                    {event.attributes.description}
-                  </ReactMarkdown>
-                </motion.div>
-              )}
-            </AnimatePresence>
+
+            <div className="relative py-4">
+              <ReactMarkdown
+                className="prose prose-lg whitespace-pre-line text-gray-800"
+                rehypePlugins={[rehypeRaw]}
+                remarkPlugins={[remarkGfm, remarkBreaks]}
+                components={{
+                  a: ({ node, ...props }) => (
+                    <a
+                      {...props}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-500 hover:underline"
+                    />
+                  ),
+                }}
+              >
+                {event.attributes.description}
+              </ReactMarkdown>
+            </div>
           </div>
         </div>
       </li>
@@ -197,35 +189,26 @@ export const Schedule = () => {
             >
               {event.attributes.location}
             </a>
-            <AnimatePresence>
-              {event.id === currentEvent && (
-                <motion.div
-                  className="relative py-4"
-                  initial="hidden"
-                  animate="visible"
-                  exit="exit"
-                  variants={descriptionVariants}
-                >
-                  <ReactMarkdown
-                    className="prose prose-lg whitespace-pre-line text-gray-800"
-                    rehypePlugins={[rehypeRaw]}
-                    remarkPlugins={[remarkGfm, remarkBreaks]}
-                    components={{
-                      a: ({ node, ...props }) => (
-                        <a
-                          {...props}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-blue-500 hover:underline"
-                        />
-                      ),
-                    }}
-                  >
-                    {event.attributes.description}
-                  </ReactMarkdown>
-                </motion.div>
-              )}
-            </AnimatePresence>
+
+            <div className="relative py-4">
+              <ReactMarkdown
+                className="prose prose-lg whitespace-pre-line text-gray-800"
+                rehypePlugins={[rehypeRaw]}
+                remarkPlugins={[remarkGfm, remarkBreaks]}
+                components={{
+                  a: ({ node, ...props }) => (
+                    <a
+                      {...props}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-500 hover:underline"
+                    />
+                  ),
+                }}
+              >
+                {event.attributes.description}
+              </ReactMarkdown>
+            </div>
           </div>
         </div>
       </li>
@@ -287,11 +270,11 @@ export const Schedule = () => {
                 <button
                   key={date}
                   role="tab"
-                  className={`cursor-pointer px-4 py-2 rounded-lg mb-2 ${
-                    activeDateTab === date
-                      ? "bg-green-500 text-white"
-                      : "bg-gray-200 text-gray-800"
-                  } focus:outline-none`}
+                  className={`cursor-pointer px-4 py-2 rounded-lg mb-2 focus:outline-none`}
+                  style={{
+                    backgroundColor: activeDateTab === date ? color : "#E5E7EB",
+                    color: activeDateTab === date ? "white" : "#1F2937",
+                  }}
                   onClick={() => setActiveDateTab(date)}
                 >
                   {date}
