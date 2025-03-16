@@ -59,12 +59,14 @@ export const Schedule = () => {
   const groupedPrimaryEvents = groupEventsByDay(primaryEvents);
   useEffect(() => {
     if (activeTab === "primary" && primaryEvents.length > 0) {
-      // Sort dates chronologically and get the first one
+      // Convert dates once and sort with localeCompare for proper string comparison
       const sortedDates = Object.keys(groupedPrimaryEvents).sort((a, b) => {
-        const dateA = new Date(a.split('.').reverse().join('-'));
-        const dateB = new Date(b.split('.').reverse().join('-'));
-        return dateA - dateB;
+        // Convert DD.MM.YYYY to YYYY-MM-DD for proper string comparison
+        const dateA = a.split('.').reverse().join('-');
+        const dateB = b.split('.').reverse().join('-');
+        return dateA.localeCompare(dateB);
       });
+      
       const firstDate = sortedDates[0];
       setActiveDateTab(firstDate);
     }
@@ -116,12 +118,12 @@ export const Schedule = () => {
             <div className="text-lg font-semibold text-gray-800">
               {event.attributes.name}
             </div>
-            <div className="text-sm text-gray-500">
+            <div className="text-sm text-gray-500 letter-spacing-wide">
               {formatDateTime(event.attributes.date)}
             </div>
             {event.attributes.entry_price && (
               <p className="text-sm text-gray-800 font-semibold flex items-center">
-                Cena: {event.attributes.entry_price} {event.attributes.goout && <a href={event.attributes.goout}><Goout /></a>}
+                Vstupné: {event.attributes.entry_price} {event.attributes.goout && <a href={event.attributes.goout}><Goout /></a>}
               </p>
             )}
             <a
@@ -186,7 +188,7 @@ export const Schedule = () => {
               {formatDateTime(event.attributes.date)}
             </div>
             <p className="text-sm text-gray-800 font-semibold">
-              Cena: {event.attributes.entry_price}
+              Vstupné: {event.attributes.entry_price}
             </p>
             <a
               style={{ color: color }}
