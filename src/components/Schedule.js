@@ -77,7 +77,7 @@ export const Schedule = () => {
 
       setActiveDateTab(sortedDates[0]);
     }
-  }, [activeTab, groupedPrimaryEvents]);
+  }, []);
 
   const renderPrimaryEventsForDate = (eventsForDate) => {
     if (!eventsForDate) {
