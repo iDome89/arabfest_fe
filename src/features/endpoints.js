@@ -48,7 +48,6 @@ const generalApi = apiSlice.injectEndpoints({
       query: () => ({
         url: "/events?populate=*",
       }),
-      providesTags: ["Events"],
     }),
     fetchSpeakers: build.query({
       query: () => ({
