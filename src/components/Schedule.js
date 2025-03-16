@@ -41,7 +41,7 @@ export const Schedule = () => {
 
   const formatDateTime = (dateTime) => {
     const date = new Date(dateTime);
-    return format(date, "d.M.yyyy - HH:mm");
+    return format(date, "d. M. yyyy - HH:mm");
   };
 
   const groupEventsByDay = (eventList) => {
@@ -55,6 +55,7 @@ export const Schedule = () => {
     });
     return groupedEvents;
   };
+
 
   const groupedPrimaryEvents = groupEventsByDay(primaryEvents);
   useEffect(() => {
