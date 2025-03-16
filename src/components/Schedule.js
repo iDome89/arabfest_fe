@@ -58,24 +58,26 @@ export const Schedule = () => {
 
   const groupedPrimaryEvents = groupEventsByDay(primaryEvents);
   useEffect(() => {
-    if (activeTab === "primary" && Object.keys(groupedPrimaryEvents).length > 0) {
+    if (
+      activeTab === "primary" &&
+      Object.keys(groupedPrimaryEvents).length > 0
+    ) {
       // Explicitly convert to dates for proper sorting
       const sortedDates = Object.keys(groupedPrimaryEvents).sort((a, b) => {
         // Parse DD.MM.YYYY format to Date objects
-        const [dayA, monthA, yearA] = a.split('.');
-        const [dayB, monthB, yearB] = b.split('.');
-        
+        const [dayA, monthA, yearA] = a.split(".");
+        const [dayB, monthB, yearB] = b.split(".");
+
         // Create Date objects (months are 0-indexed in JS Date)
-        const dateA = new Date(yearA, monthA-1, dayA);
-        const dateB = new Date(yearB, monthB-1, dayB);
-        
+        const dateA = new Date(yearA, monthA - 1, dayA);
+        const dateB = new Date(yearB, monthB - 1, dayB);
+
         return dateA - dateB;
       });
-      
+
       setActiveDateTab(sortedDates[0]);
     }
   }, [activeTab, groupedPrimaryEvents]);
-
 
   const renderPrimaryEventsForDate = (eventsForDate) => {
     if (!eventsForDate) {
@@ -107,7 +109,12 @@ export const Schedule = () => {
             </div>
             {event.attributes.entry_price && (
               <p className="text-sm text-gray-800 font-semibold flex items-center">
-                Vstupné: {event.attributes.entry_price} {event.attributes.goout && <a href={event.attributes.goout}><Goout /></a>}
+                Vstupné: {event.attributes.entry_price}{" "}
+                {event.attributes.goout && (
+                  <a href={event.attributes.goout}>
+                    <Goout />
+                  </a>
+                )}
               </p>
             )}
             <a
@@ -260,25 +267,32 @@ export const Schedule = () => {
             >
               {Object.keys(groupedPrimaryEvents)
                 .sort((a, b) => {
-                  // Convert strings back to Date objects for proper comparison
-                  const dateA = new Date(a.split('.').reverse().join('-'));
-                  const dateB = new Date(b.split('.').reverse().join('-'));
+                  const [dayA, monthA, yearA] = a.split(".");
+                  const [dayB, monthB, yearB] = b.split(".");
+                  const dateA = new Date(yearA, monthA - 1, dayA);
+                  const dateB = new Date(yearB, monthB - 1, dayB);
                   return dateA - dateB;
                 })
-                .map((date) => (
-                  <button
-                    key={date}
-                    role="tab"
-                    className={`cursor-pointer px-4 py-2 rounded-lg mb-2 focus:outline-none`}
-                    style={{
-                      backgroundColor: activeDateTab === date ? color : "#E5E7EB",
-                      color: activeDateTab === date ? "white" : "#1F2937",
-                    }}
-                    onClick={() => setActiveDateTab(date)}
-                  >
-                    {date}
-                  </button>
-                ))}
+                .map((date) => {
+                  // Format date with spaces around dots
+                  const formattedDate = date.replace(/\./g, ". ");
+
+                  return (
+                    <button
+                      key={date}
+                      role="tab"
+                      className="cursor-pointer px-4 py-2 rounded-lg mb-2 focus:outline-none tracking-wider"
+                      style={{
+                        backgroundColor:
+                          activeDateTab === date ? color : "#E5E7EB",
+                        color: activeDateTab === date ? "white" : "#1F2937",
+                      }}
+                      onClick={() => setActiveDateTab(date)}
+                    >
+                      {formattedDate}
+                    </button>
+                  );
+                })}
             </div>
             <div className="max-w-xl m-auto" role="tabpanel">
               {activeDateTab ? (
