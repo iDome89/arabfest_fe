@@ -58,40 +58,24 @@ export const Schedule = () => {
 
   const groupedPrimaryEvents = groupEventsByDay(primaryEvents);
   useEffect(() => {
-    if (activeTab === "primary" && primaryEvents.length > 0) {
-      // Convert dates once and sort with localeCompare for proper string comparison
+    if (activeTab === "primary" && Object.keys(groupedPrimaryEvents).length > 0) {
+      // Explicitly convert to dates for proper sorting
       const sortedDates = Object.keys(groupedPrimaryEvents).sort((a, b) => {
-        // Convert DD.MM.YYYY to YYYY-MM-DD for proper string comparison
-        const dateA = a.split('.').reverse().join('-');
-        const dateB = b.split('.').reverse().join('-');
-        return dateA.localeCompare(dateB);
+        // Parse DD.MM.YYYY format to Date objects
+        const [dayA, monthA, yearA] = a.split('.');
+        const [dayB, monthB, yearB] = b.split('.');
+        
+        // Create Date objects (months are 0-indexed in JS Date)
+        const dateA = new Date(yearA, monthA-1, dayA);
+        const dateB = new Date(yearB, monthB-1, dayB);
+        
+        return dateA - dateB;
       });
       
-      const firstDate = sortedDates[0];
-      setActiveDateTab(firstDate);
+      setActiveDateTab(sortedDates[0]);
     }
-  }, [activeTab, events]);
+  }, [activeTab, groupedPrimaryEvents]);
 
-  // Animation variants for Framer Motion
-  const descriptionVariants = {
-    hidden: { opacity: 0, height: 0, overflow: "hidden" },
-    visible: {
-      opacity: 1,
-      height: "auto",
-      transition: {
-        duration: 0.1,
-        ease: "easeInOut",
-      },
-    },
-    exit: {
-      opacity: 0,
-      height: 0,
-      transition: {
-        duration: 0.1,
-        ease: "easeInOut",
-      },
-    },
-  };
 
   const renderPrimaryEventsForDate = (eventsForDate) => {
     if (!eventsForDate) {
