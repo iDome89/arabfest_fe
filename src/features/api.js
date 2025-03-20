@@ -32,6 +32,7 @@ export const apiSlice = createApi({
     "MediaArticles",
     "PressReleases",
     "Sponsors",
+    "Organization",
     "Team",
     "News",
     "Vizual"

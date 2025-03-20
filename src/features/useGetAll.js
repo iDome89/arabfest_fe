@@ -1,17 +1,18 @@
 import {
-    useFetchAboutQuery,
-    useFetchFooterDataQuery,
-    useFetchGalleryQuery,
-    useFetchBannerQuery,
-    useFetchLocationsQuery,
-    useFetchMediaArticlesQuery,
-    useFetchPressReleasesQuery,
-    useFetchEventsQuery,
-    useFetchSpeakersQuery,
-    useFetchSponsorsQuery,
-    useFetchTeamQuery,
-    useFetchNewsQuery,
-    useFetchVisualsQuery,
+  useFetchAboutQuery,
+  useFetchFooterDataQuery,
+  useFetchGalleryQuery,
+  useFetchBannerQuery,
+  useFetchLocationsQuery,
+  useFetchMediaArticlesQuery,
+  useFetchPressReleasesQuery,
+  useFetchEventsQuery,
+  useFetchSpeakersQuery,
+  useFetchSponsorsQuery,
+  useFetchTeamQuery,
+  useFetchNewsQuery,
+  useFetchVisualsQuery,
+  useFetchOrganizationQuery
 } from "./endpoints";
 
 export const useGetAll = () => {
@@ -28,6 +29,7 @@ export const useGetAll = () => {
   const { data: sponsors } = useFetchSponsorsQuery();
   const { data: team } = useFetchTeamQuery();
   const { data: news } = useFetchNewsQuery();
+  const {data:organization} = useFetchOrganizationQuery();
   return {
     isLoading:
       isLoadingAbout || isLoadingBanner || isLoadingEvents || isLoadingVisual,
@@ -44,5 +46,6 @@ export const useGetAll = () => {
     team: team?.data,
     news: news?.data,
     color: visual?.data.attributes.color,
+    organization: organization?.data,
   };
 };

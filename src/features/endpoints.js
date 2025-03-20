@@ -32,6 +32,12 @@ const generalApi = apiSlice.injectEndpoints({
       }),
       providesTags: ["Locations"],
     }),
+    fetchOrganization: build.query({
+      query: () => ({
+        url: "/organization?populate=*",
+      }),
+      providesTags: ["Organization"],
+    }),
     fetchMediaArticles: build.query({
       query: () => ({
         url: "/media-articles?sort=id&populate=*",
@@ -97,4 +103,5 @@ export const {
   useFetchTeamQuery,
   useFetchNewsQuery,
   useFetchVisualsQuery,
+  useFetchOrganizationQuery,
 } = generalApi;

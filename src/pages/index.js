@@ -12,11 +12,12 @@ import Contact from "@/components/Contact";
 import { Gallery } from "@/components/Gallery";
 import { useGetAll } from "@/features/useGetAll";
 import SkeletonLayout from "@/components/Skeleton";
+import { Organization } from "@/components/Organization";
 
 export default function Home() {
-  const { isLoading} = useGetAll()
+  const { isLoading } = useGetAll();
   if (isLoading) {
-    return  <SkeletonLayout />
+    return <SkeletonLayout />;
   }
   return (
     <main className="flex min-h-screen flex-col bg-transparent">
@@ -44,6 +45,9 @@ export default function Home() {
       </section>
       <section id="partneři">
         <Sponsors />
+      </section>
+      <section id="organization">
+        <Organization />
       </section>
       <section id="kontakt">
         <Contact />
