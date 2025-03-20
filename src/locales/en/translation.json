@@ -1,0 +1,65 @@
+{
+    "navigation": {
+        "news": "News",
+        "about": "About the Festival",
+        "team": "Team",
+        "program": "Program",
+        "partners": "Partners",
+        "contact": "Contact"
+      },
+    "about": {
+      "title": "About the Festival"
+    },
+  
+    "events": {
+      "title": "Events",
+      "primary": "Main Program",
+      "secondary": "Accompanying Program",
+      "prague_event": "Events in Prague",
+      "in_prep": "We are still preparing the program for the 15th edition",
+      "entry_price": "Admission"
+    },
+    "gallery": {
+      "title": "Gallery",
+      "photographer": "Photographers"
+    },
+    "media": {
+      "title": "Media",
+      "wrote_about": "They Wrote About Us",
+      "paper_news": "Press Releases"
+    },
+    "media_articles":{
+      "original_article": "Original Article"
+    },
+    "news":{
+      "title": "News"
+    },
+    "press_releases":{
+      "published": "Published",
+      "press_release": "Press Release",
+      "download": "Download"
+    },
+    "reservation": {
+    "title": "Contact Form",
+    "name": "Name",
+    "email": "Email",
+    "subject": "Subject",
+    "message": "Message",
+    "send": "SEND MESSAGE",
+    "sending": "SENDING...",
+    "success_title": "Thank you!",
+    "success_message": "Your message has been sent successfully. We'll get back to you soon.",
+    "new_message": "Send another message",
+    "error_message": "There was an error submitting the form. Please try again later."
+  },
+    "speakers":{
+      "title": "Guests"
+    },
+    "sponsors": {
+      "title": "Partners",
+      "media": "Media Partners"
+    },
+    "team": {
+      "title": "Our Team"
+    }
+  }

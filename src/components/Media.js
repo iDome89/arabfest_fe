@@ -2,14 +2,16 @@ import { useState } from "react";
 import { MediaArticles } from "./MediaArticles";
 import { PressReleases } from "./PressReleases";
 import { useGetAll } from "@/features/useGetAll";
+import { useTranslation } from "react-i18next";
 
 export const Media = () => {
   const [activeTab, setActiveTab] = useState("articles");
+  const {t} = useTranslation();
   const {color} = useGetAll();
   return (
     <div className="bg-white py-12 px-4 sm:px-6 lg:px-8">
       <h2 className="text-3xl text-center font-bold text-gray-800 mb-8">
-        Média
+        {t("media.title")}
       </h2>
       <div className="max-w-7xl mx-auto min-h-[300px]">
         <div
@@ -25,7 +27,7 @@ export const Media = () => {
             }}
             onClick={() => setActiveTab("articles")}
           >
-            Napsali o nás
+           {t("media.wrote_about")}
           </button>
           <button
             role="tab"
@@ -37,7 +39,7 @@ export const Media = () => {
             }}
             onClick={() => setActiveTab("press-releases")}
           >
-            Tiskové zprávy
+            {t("media.paper_news")}
           </button>
         </div>
 

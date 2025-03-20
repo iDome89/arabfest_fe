@@ -4,16 +4,17 @@ import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
 import remarkBreaks from "remark-breaks";
 import { useGetAll } from "@/features/useGetAll";
+import { useTranslation } from "react-i18next";
 
 export const About = () => {
   const [showMore, setShowMore] = useState(false);
-
+  const {t} = useTranslation();
   const { about } = useGetAll();
-
+if(!about) return null;
   return (
     <div className="bg-white pt-12 pb-4 px-4 sm:px-6 lg:px-8">
       <h2 className="text-3xl text-center font-bold text-gray-800 mb-12">
-        O festivalu
+       {t("about.title")}
       </h2>
 
       {/* Short Content (Always Visible) */}

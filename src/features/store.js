@@ -1,10 +1,12 @@
 import { apiSlice } from "@/features/api";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
+import languageReducer from "./languageReducer";
 
 
 const rootReducer = combineReducers({
   [apiSlice.reducerPath]: apiSlice.reducer,
+  language: languageReducer
 });
 
 

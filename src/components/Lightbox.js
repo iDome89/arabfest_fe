@@ -1,4 +1,7 @@
+import { useTranslation } from "react-i18next";
+
 const Lightbox = ({ isOpen, src, onClose, onNext, onPrev, photographerName, photographerUrl }) => {
+  const {t} = useTranslation();
   if (!isOpen) return null;
 
   return (
@@ -24,7 +27,7 @@ const Lightbox = ({ isOpen, src, onClose, onNext, onPrev, photographerName, phot
             target="_blank" 
             className="cursor-pointer text-white absolute bottom-2 left-6 text-lg z-10"
           >
-           Fotograf: {photographerName}
+           {t("gallery.photographer")}: {photographerName}
           </a>}
         </div>
 

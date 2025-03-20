@@ -1,0 +1,65 @@
+{
+  "navigation": {
+    "news": "Novinky",
+    "about": "O festivalu",
+    "team": "Tým",
+    "program": "Program",
+    "partners": "Partneři",
+    "contact": "Kontakt"
+  },
+  "about": {
+    "title": "O festivalu"
+  },
+
+  "events": {
+    "title": "Akce",
+    "primary": "Hlavní program",
+    "secondary": "Doprovodný program",
+    "prague_event": "Akce v Praze",
+    "in_prep": "Stále pro vás připravujeme program 15. ročníku",
+    "entry_price": "Vstupné"
+  },
+  "gallery": {
+    "title": "Galerie",
+    "photographer": "Fotografové"
+  },
+  "media": {
+    "title": "Média",
+    "wrote_about": "Napsali o nás",
+    "paper_news": "Tiskové zprávy"
+  },
+  "media_articles": {
+    "original_article": "Původní článek"
+  },
+  "news": {
+    "title": "Novinky"
+  },
+  "press_releases": {
+    "published": "Publikováno",
+    "press_release": "Tisková zpráva",
+    "download": "Stáhnout"
+  },
+  "reservation": {
+    "title": "Kontaktní formulář",
+    "name": "Jméno",
+    "email": "Email",
+    "subject": "Předmět",
+    "message": "Zpráva",
+    "send": "POSLAT ZPRÁVU",
+    "sending": "ODESÍLÁNÍ...",
+    "success_title": "Děkujeme!",
+    "success_message": "Vaše zpráva byla úspěšně odeslána. Brzy se vám ozveme.",
+    "new_message": "Poslat další zprávu",
+    "error_message": "Při odesílání formuláře došlo k chybě. Zkuste to prosím později."
+  },
+  "speakers": {
+    "title": "Hosté"
+  },
+  "sponsors": {
+    "title": "Partneři",
+    "media": "Mediální partneři"
+  },
+  "team": {
+    "title": "Náš tým"
+  }
+}

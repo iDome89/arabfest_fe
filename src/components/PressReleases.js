@@ -1,6 +1,8 @@
 import { useGetAll } from "@/features/useGetAll";
+import { useTranslation } from "react-i18next";
 export const PressReleases = () => {
   const { pressReleases } = useGetAll();
+  const {t} = useTranslation();
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const options = {
@@ -32,8 +34,8 @@ export const PressReleases = () => {
         <table className="table">
           <thead>
             <tr>
-              <th className="text-gray-700">Publikováno</th>
-              <th className="text-gray-700">Tisková zpráva</th>
+              <th className="text-gray-700">{t("press_releases.published")}</th>
+              <th className="text-gray-700">{t("press_releases.press_release")}</th>
               <th></th>
             </tr>
           </thead>
@@ -52,7 +54,7 @@ export const PressReleases = () => {
                     href={
                       pressRelease.attributes.pdf_document.data.attributes.url
                     }
-                  >{`Stáhnout PDF(${formatSize(
+                  >{`${t('press_releases.download')} PDF(${formatSize(
                     pressRelease.attributes.pdf_document.data.attributes.size
                   )})`}</a>
                 </td>

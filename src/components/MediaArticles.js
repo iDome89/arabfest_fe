@@ -1,11 +1,12 @@
 import { useGetAll } from "@/features/useGetAll";
+import { useTranslation } from "react-i18next";
 import ReactMarkdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
 
 export const MediaArticles = () => {
   const { mediaArticles: articles, color } = useGetAll();
-
+  const {t} = useTranslation();
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const options = {
@@ -21,6 +22,10 @@ export const MediaArticles = () => {
     const formattedTime = date.toLocaleTimeString(locale, options);
     return `${formattedDate} ${formattedTime}`;
   };
+
+if(!articles) return null;
+
+
 
   if (!articles || articles.length === 0) {
     return null;
@@ -62,7 +67,7 @@ export const MediaArticles = () => {
                   href={article.attributes.original_link}
                   className="text-xs text-gray-700 hover:text-black"
                 >
-                  Původní článek
+                  {t("media_articles.original_article")}
                 </a>
               </div>
             )}

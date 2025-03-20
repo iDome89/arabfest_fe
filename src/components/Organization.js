@@ -20,7 +20,7 @@ export const Organization = () => {
     
     return `${str.substring(0, breakPoint)}...`;
   };
-
+if(!organization) return null;
   return (
     <div className="bg-white pt-12 pb-4 px-4 sm:px-6 lg:px-8">
       <h2 className="text-3xl text-center font-bold text-gray-800 mb-12">

@@ -2,7 +2,7 @@ import { useGetAll } from "@/features/useGetAll";
 
 export const Footer = () => {
 const {contact} = useGetAll();
-
+if (!contact) return null;
   return (
     <footer className="bg-white py-8 border-t">
       <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">

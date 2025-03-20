@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { useGetAll } from "@/features/useGetAll";
+import { useTranslation } from "react-i18next";
 
 export const Sponsors = () => {
   const [showModal, setShowModal] = useState(false);
   const [currentSponsor, setCurrentSponsor] = useState(null);
   const [activeTab, setActiveTab] = useState("partners");
+  const {t} = useTranslation();
 
   const { sponsors, color } = useGetAll();
 
@@ -21,7 +23,7 @@ export const Sponsors = () => {
   return (
     <div className="bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="text-center mb-12">
-        <h2 className="text-3xl font-bold text-gray-800">Partneři</h2>
+        <h2 className="text-3xl font-bold text-gray-800">{t("sponsors.title")}</h2>
       </div>
       <div
         role="tablist"
@@ -36,7 +38,7 @@ export const Sponsors = () => {
           }}
           onClick={() => setActiveTab("partners")}
         >
-          Partneři
+          {t("sponsors.title")}
         </button>
         <button
           role="tab"
@@ -47,7 +49,7 @@ export const Sponsors = () => {
           }}
           onClick={() => setActiveTab("media-partners")}
         >
-          Mediální partneři
+          {t("sponsors.media")}
         </button>
       </div>
       {activeTab === "partners" && (

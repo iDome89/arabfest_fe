@@ -9,11 +9,14 @@ import remarkGfm from "remark-gfm";
 import remarkBreaks from "remark-breaks";
 import { useGetAll } from "@/features/useGetAll";
 import Goout from "@/features/Goout";
+import { useTranslation } from "react-i18next";
 
 export const Schedule = () => {
   const [activeTab, setActiveTab] = useState("primary");
   const [activeDateTab, setActiveDateTab] = useState("");
   const [currentEvent, setCurrentEvent] = useState(null);
+  const { t} = useTranslation();
+
 
   const toggleEvent = (event) => {
     if (currentEvent === event) {
@@ -24,13 +27,13 @@ export const Schedule = () => {
   };
   const { events, color } = useGetAll();
 
-  const primaryEvents = events.filter(
+  const primaryEvents = events?.filter(
     (event) => event.attributes.event_type === "primary"
   );
-  const secondaryEvents = events.filter(
+  const secondaryEvents = events?.filter(
     (event) => event.attributes.event_type === "secondary"
   );
-  const pragueEvents = events.filter(
+  const pragueEvents = events?.filter(
     (event) => event.attributes.event_type === "prague_event"
   );
 
@@ -46,7 +49,7 @@ export const Schedule = () => {
 
   const groupEventsByDay = (eventList) => {
     const groupedEvents = {};
-    eventList.forEach((event) => {
+    eventList?.forEach((event) => {
       const date = formatDate(event.attributes.date);
       if (!groupedEvents[date]) {
         groupedEvents[date] = [];
@@ -84,9 +87,13 @@ export const Schedule = () => {
     if (!eventsForDate) {
       return (
         <div className="text-center text-gray-500">
-          Stále pro vás připravujeme program 15. ročníku
+          {t("events.in_prep")}
         </div>
       );
+    }
+
+    if (!events) {
+      return null;
     }
     return eventsForDate.map((event, index) => (
       <li
@@ -110,7 +117,7 @@ export const Schedule = () => {
             </div>
             {event.attributes.entry_price && (
               <p className="text-sm text-gray-800 font-semibold flex items-center">
-                Vstupné: {event.attributes.entry_price}{" "}
+                 {t("events.entry_price")}: {event.attributes.entry_price}{" "}
                 {event.attributes.goout && (
                   <a href={event.attributes.goout}>
                     <Goout />
@@ -155,7 +162,7 @@ export const Schedule = () => {
     if (eventList.length === 0) {
       return (
         <div className="text-center text-gray-500">
-          Stále pro vás připravujeme program 15. ročníku
+           {t("events.in_prep")}
         </div>
       );
     }
@@ -180,7 +187,7 @@ export const Schedule = () => {
               {formatDateTime(event.attributes.date)}
             </div>
             <p className="text-sm text-gray-800 font-semibold">
-              Vstupné: {event.attributes.entry_price}
+            {t("events.entry_price")}: {event.attributes.entry_price}
             </p>
             <a
               style={{ color: color }}
@@ -218,7 +225,7 @@ export const Schedule = () => {
   return (
     <div className="bg-white py-12 px-4 sm:px-6 lg:px-8">
       <h2 className="text-3xl text-center font-bold text-gray-800 mb-8">
-        Akce
+      {t("events.title")}
       </h2>
       <div className="max-w-7xl mx-auto min-h-[300px]">
         <div
@@ -234,7 +241,7 @@ export const Schedule = () => {
             }}
             onClick={() => setActiveTab("primary")}
           >
-            Hlavní program
+           {t("events.primary")}
           </button>
           <button
             role="tab"
@@ -245,7 +252,7 @@ export const Schedule = () => {
             }}
             onClick={() => setActiveTab("secondary")}
           >
-            Doprovodný program
+            {t("events.secondary")}
           </button>
           <button
             role="tab"
@@ -256,7 +263,7 @@ export const Schedule = () => {
             }}
             onClick={() => setActiveTab("prague")}
           >
-            Akce v Praze
+            {t("events.prague_event")}
           </button>
         </div>
 
@@ -304,7 +311,7 @@ export const Schedule = () => {
                 </ul>
               ) : (
                 <div className="text-center text-gray-500">
-                  Stále pro vás připravujeme novinky program 15. ročníku
+                   {t("events.in_prep")}
                 </div>
               )}
             </div>

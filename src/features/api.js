@@ -4,7 +4,7 @@ const customBaseQuery = async (args, api, extraOptions) => {
   const baseQuery = fetchBaseQuery({
     baseUrl: process.env.NEXT_PUBLIC_API_URL,
 
-    prepareHeaders: async (headers) => {
+    prepareHeaders: async (headers, { getState }) => {
       headers.set(
         "authorization",
         `Bearer ${process.env.NEXT_PUBLIC_STRAPI_API}`
@@ -17,6 +17,9 @@ const customBaseQuery = async (args, api, extraOptions) => {
 
   return result;
 };
+
+
+
 
 export const apiSlice = createApi({
   reducerPath: "api",

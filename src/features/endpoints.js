@@ -3,87 +3,132 @@ import { apiSlice } from "./api";
 const generalApi = apiSlice.injectEndpoints({
   endpoints: (build) => ({
     fetchAbout: build.query({
-      query: () => ({
-        url: `/about?populate[components][populate]=*`,
-      }),
+      query: (params = {}) => {
+        const { language = "en" } = params;
+        return {
+          url: `/about?populate[components][populate]=*&locale=${language}`,
+        };
+      },
       providesTags: ["About"],
     }),
     fetchFooterData: build.query({
-      query: () => ({
-        url: `/contact?populate=*`,
-      }),
+      query: () => {
+        return {
+          url: `/contact?populate=*`,
+        };
+      },
       providesTags: ["Contacts"],
     }),
     fetchGallery: build.query({
-      query: () => ({
-        url: "/images?sort=id&populate[image][populate]=*&populate[category][populate][thumbnail][populate]=*",
-      }),
+      query: () => {
+        return {
+          url: `/images?sort=id&populate[image][populate]=*&populate[category][populate][thumbnail][populate]=*`,
+        };
+      },
       providesTags: ["Gallery"],
     }),
     fetchBanner: build.query({
-      query: () => ({
-        url: "/banner?populate=*",
-      }),
+      query: () => {
+        return {
+          url: `/banner?populate=*`,
+        };
+      },
       providesTags: ["Banner"],
     }),
     fetchLocations: build.query({
-      query: () => ({
-        url: "/locations?sort=id&populate=*",
-      }),
+      query: () => {
+        return {
+          url: `/locations?sort=id&populate=*`,
+        };
+      },
       providesTags: ["Locations"],
     }),
     fetchOrganization: build.query({
-      query: () => ({
-        url: "/organization?populate=*",
-      }),
+      query: (params = {}) => {
+        const { language } = params;
+        return {
+          url: `/organization?populate=*&locale=${language}`,
+        };
+      },
       providesTags: ["Organization"],
     }),
     fetchMediaArticles: build.query({
-      query: () => ({
-        url: "/media-articles?sort=id&populate=*",
-      }),
+      query: (params = {}) => {
+        const { language } = params;
+        return {
+          url: `/media-articles?sort=id&populate=*&locale=${language}`,
+        };
+      },
       providesTags: ["MediaArticles"],
     }),
     fetchPressReleases: build.query({
-      query: () => ({
-        url: "/press-releases?sort=date&populate=*",
-      }),
+      query: (params = {}) => {
+        const { language } = params;
+        return {
+          url: `/press-releases?sort=date&populate=*&locale=${language}`,
+        };
+      },
       providesTags: ["PressReleases"],
     }),
     fetchEvents: build.query({
-      query: () => ({
-        url: "/events?populate=*",
-      }),
+      query: (params = {}) => {
+        const { language } = params;
+        return {
+          url: `/events?populate=*&locale=${language}`,
+        };
+      },
     }),
     fetchSpeakers: build.query({
-      query: () => ({
-        url: "/speakers?sort=id&populate[picture][populate]=*"
-      }),
+      query: (params = {}) => {
+        const { language } = params;
+        return {
+          url: `/speakers?sort=id&populate[picture][populate]=*&locale=${language}`,
+        };
+      },
       providesTags: ["Speakers"],
     }),
     fetchSponsors: build.query({
-      query: () => ({
-        url: "/partners?populate=*&pagination[pageSize]=30&sort=id:asc",
-      }),
+      query: () => {
+        return {
+          url: `/partners?populate=*&pagination[pageSize]=30&sort=id:asc`,
+        };
+      },
       providesTags: ["Sponsors"],
     }),
     fetchTeam: build.query({
-      query: () => ({
-        url: "/teams?sort=order&populate=team_member.picture",
-      }),
+      query: (params = {}) => {
+        const { language } = params;
+        return {
+          url: `/teams?sort=order&populate=team_member.picture&locale=${language}`,
+        };
+      },
       providesTags: ["Team"],
     }),
     fetchNews: build.query({
-      query: () => ({
-        url: "/news?populate=*",
-      }),
+      query: (params = {}) => {
+        const { language } = params;
+        return {
+          url: `/news?populate=*&locale=${language}`,
+        };
+      },
       providesTags: ["News"],
     }),
     fetchVisuals: build.query({
-      query: () => ({
-        url: "/vizual?populate=*",
-      }),
+      query: () => {
+        return {
+          url: `/vizual?populate=*`,
+        };
+      },
       providesTags: ["Vizual"],
+    }),
+    createContactForm: build.mutation({
+      query: (formData) => ({
+        url: "/contact-form",
+        method: "POST",
+        body: {
+          data: formData,
+        },
+      }),
     }),
   }),
   overrideExisting: false,
@@ -104,4 +149,5 @@ export const {
   useFetchNewsQuery,
   useFetchVisualsQuery,
   useFetchOrganizationQuery,
+  useCreateContactFormMutation,
 } = generalApi;

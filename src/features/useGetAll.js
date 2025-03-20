@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import {
   useFetchAboutQuery,
   useFetchFooterDataQuery,
@@ -16,20 +17,21 @@ import {
 } from "./endpoints";
 
 export const useGetAll = () => {
+   const currentLanguage = useSelector(state => state.language.current);
   const { data: visual, isLoading: isLoadingVisual } = useFetchVisualsQuery();
-  const { data: aboutData, isLoading: isLoadingAbout } = useFetchAboutQuery();
+  const { data: aboutData, isLoading: isLoadingAbout } = useFetchAboutQuery({ language: currentLanguage });
   const { data: footerData } = useFetchFooterDataQuery();
   const { data: gallery } = useFetchGalleryQuery();
   const { data: banner, isLoading: isLoadingBanner } = useFetchBannerQuery();
   const { data: locations } = useFetchLocationsQuery();
-  const { data: mediaArticles } = useFetchMediaArticlesQuery();
-  const { data: pressReleases } = useFetchPressReleasesQuery();
-  const { data: events, isLoading: isLoadingEvents } = useFetchEventsQuery();
-  const { data: speakers } = useFetchSpeakersQuery();
+  const { data: mediaArticles } = useFetchMediaArticlesQuery({ language: currentLanguage });
+  const { data: pressReleases } = useFetchPressReleasesQuery({ language: currentLanguage });
+  const { data: events, isLoading: isLoadingEvents } = useFetchEventsQuery({ language: currentLanguage });
+  const { data: speakers } = useFetchSpeakersQuery({ language: currentLanguage });
   const { data: sponsors } = useFetchSponsorsQuery();
-  const { data: team } = useFetchTeamQuery();
-  const { data: news } = useFetchNewsQuery();
-  const {data:organization} = useFetchOrganizationQuery();
+  const { data: team } = useFetchTeamQuery({ language: currentLanguage });
+  const { data: news } = useFetchNewsQuery({ language: currentLanguage });
+  const {data:organization} = useFetchOrganizationQuery({ language: currentLanguage });
   return {
     isLoading:
       isLoadingAbout || isLoadingBanner || isLoadingEvents || isLoadingVisual,

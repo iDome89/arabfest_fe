@@ -1,8 +1,10 @@
 import { FaPhoneAlt } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { useGetAll } from "@/features/useGetAll";
+import { useTranslation } from "react-i18next";
 
 export const Team = () => {
+  const {t} = useTranslation();
   const { team: members } = useGetAll();
 
   if (!members || members.length === 0) {
@@ -12,7 +14,7 @@ export const Team = () => {
   return (
     <div className="bg-white py-10 px-4 sm:px-6 lg:px-8">
       <h2 className="text-3xl text-center font-bold text-gray-800 mb-8">
-        Náš tým
+        {t("team.title")}
       </h2>
       <div className="container mx-auto flex flex-wrap justify-center gap-6">
         {members.length > 0 &&

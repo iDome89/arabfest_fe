@@ -1,11 +1,12 @@
 import { useState } from "react";
 import Lightbox from "./Lightbox";
 import { useGetAll } from "@/features/useGetAll";
+import { useTranslation } from "react-i18next";
 
 export const Gallery = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [photoIndex, setPhotoIndex] = useState(0);
-
+  const {t} = useTranslation();
   const { gallery: images } = useGetAll();
   if (!images || !images.length > 0) return null;
   const uniqueCategories = new Map();
@@ -45,7 +46,7 @@ export const Gallery = () => {
   return (
     <div className="bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="text-center mb-12">
-        <h2 className="text-3xl font-bold text-gray-800">Galerie</h2>
+        <h2 className="text-3xl font-bold text-gray-800">{t("gallery.title")}</h2>
       </div>
       <div className="flex flex-wrap justify-center gap-6">
         {categoriesArray.length > 0 &&
