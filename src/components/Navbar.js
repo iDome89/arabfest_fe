@@ -130,7 +130,7 @@ export const Navbar = () => {
         </div>
       </div>
       {isMenuOpen && (
-        <div className="md:hidden fixed top-0 left-0 w-full h-full bg-black bg-opacity-75 z-20">
+        <div className="md:hidden fixed top-0 left-0 w-full h-full z-20" style={{ backgroundColor: "rgba(0, 0, 0, 0.8)" }}>
           <div className="flex flex-col w-full space-y-4 items-center justify-center h-full">
             {navItems.map((item, index) => (
               <Link
@@ -139,9 +139,7 @@ export const Navbar = () => {
                 smooth={true}
                 duration={500}
                 offset={-headerHeight}
-                className={`cursor-pointer text-base sm:text-lg
-                 "text-white font-bold"
-                `}
+                className={`cursor-pointer text-base sm:text-lg text-white font-bold`}
               >
                 {t(`navigation.${item.key}`).toUpperCase()}
               </Link>
