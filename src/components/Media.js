@@ -7,7 +7,8 @@ import { useTranslation } from "react-i18next";
 export const Media = () => {
   const [activeTab, setActiveTab] = useState("articles");
   const {t} = useTranslation();
-  const {color} = useGetAll();
+  const { mediaArticles: articles, pressReleases, color } = useGetAll();
+  if(!articles.length === 0 && !pressReleases.length === 0) return null;
   return (
     <div className="bg-white py-12 px-4 sm:px-6 lg:px-8">
       <h2 className="text-3xl text-center font-bold text-gray-800 mb-8">
@@ -43,7 +44,7 @@ export const Media = () => {
           </button>
         </div>
 
-        {activeTab === "articles" && (
+        {activeTab === "articles" && articles.length > 0 &&(
           <div>
             <div
               role="tablist"
@@ -53,7 +54,7 @@ export const Media = () => {
             </div>
           </div>
         )}
-        {activeTab === "press-releases" && (
+        {activeTab === "press-releases" && pressReleases.length > 0 && (
           <div>
             <div
               role="tablist"
