@@ -66,7 +66,7 @@ export const Navbar = () => {
 
   return (
     <div
-      className={`navbar p-4 sm:p-6 fixed z-10 w-full transition-all duration-300 ${
+      className={`navbar px-4 py-2 sm:px-6 sm:py-3 fixed z-10 w-full transition-all duration-300 ${
         isScrolled ? "bg-white shadow-lg" : "bg-transparent header-shadow"
       }`}
     >
