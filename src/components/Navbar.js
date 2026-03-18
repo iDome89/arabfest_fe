@@ -56,12 +56,12 @@ export const Navbar = () => {
   };
 
   const navItems = [
-    { key: "news", sectionId: "novinky" },
     { key: "about", sectionId: "o festivalu" },
-    { key: "team", sectionId: "tým" },
     { key: "program", sectionId: "program" },
-    { key: "partners", sectionId: "partneři" },
+    { key: "gallery", sectionId: "galerie" },
+    { key: "team", sectionId: "tým" },
     { key: "contact", sectionId: "kontakt" },
+    { key: "partners", sectionId: "partneři" },
   ];
 
   return (

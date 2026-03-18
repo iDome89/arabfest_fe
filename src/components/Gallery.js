@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import Lightbox from "./Lightbox";
 import { useGetAll } from "@/features/useGetAll";
 import { useTranslation } from "react-i18next";
@@ -6,28 +6,37 @@ import { useTranslation } from "react-i18next";
 export const Gallery = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [photoIndex, setPhotoIndex] = useState(0);
+  const [selectedCategoryId, setSelectedCategoryId] = useState(null);
   const {t} = useTranslation();
   const { gallery: images } = useGetAll();
   if (!images || !images.length > 0) return null;
+
   const uniqueCategories = new Map();
   images.forEach((item) => {
     const category = item.attributes.category?.data;
     if (category) {
       uniqueCategories.set(category.id, {
         name: category.attributes.name,
-        thumbnail: category.attributes.thumbnail, // Store thumbnail properly
+        thumbnail: category.attributes.thumbnail,
       });
     }
   });
 
-  // Convert Map to Array
   const categoriesArray = Array.from(uniqueCategories, ([id, value]) => ({
     id,
     name: value.name,
     thumbnail: value.thumbnail,
   }));
-  const handleImageClick = (index) => {
-    setPhotoIndex(index);
+
+  const filteredImages = selectedCategoryId
+    ? images.filter(
+        (item) => item.attributes.category?.data?.id === selectedCategoryId
+      )
+    : images;
+
+  const handleImageClick = (categoryId) => {
+    setSelectedCategoryId(categoryId);
+    setPhotoIndex(0);
     setIsOpen(true);
   };
 
@@ -36,11 +45,11 @@ export const Gallery = () => {
   };
 
   const handleNext = () => {
-    setPhotoIndex((photoIndex + 1) % images.length);
+    setPhotoIndex((photoIndex + 1) % filteredImages.length);
   };
 
   const handlePrev = () => {
-    setPhotoIndex((photoIndex + images.length - 1) % images.length);
+    setPhotoIndex((photoIndex + filteredImages.length - 1) % filteredImages.length);
   };
 
   return (
@@ -50,10 +59,10 @@ export const Gallery = () => {
       </div>
       <div className="flex flex-wrap justify-center gap-6">
         {categoriesArray.length > 0 &&
-          categoriesArray.map((category, index) => (
+          categoriesArray.map((category) => (
             <div
-              key={index}
-              onClick={() => handleImageClick(index)}
+              key={category.id}
+              onClick={() => handleImageClick(category.id)}
               className="cursor-pointer w-full sm:max-w-[220px] bg-white shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition-transform duration-300 relative flex flex-col"
             >
               <img
@@ -66,9 +75,9 @@ export const Gallery = () => {
       </div>
       <Lightbox
         isOpen={isOpen}
-        src={images[photoIndex]?.attributes.image.data.attributes.url}
-        photographerName={images[photoIndex]?.attributes.photographer_name}
-        photographerUrl={images[photoIndex]?.attributes.photographer_website}
+        src={filteredImages[photoIndex]?.attributes.image.data.attributes.url}
+        photographerName={filteredImages[photoIndex]?.attributes.photographer_name}
+        photographerUrl={filteredImages[photoIndex]?.attributes.photographer_website}
         onClose={handleClose}
         onNext={handleNext}
         onPrev={handlePrev}

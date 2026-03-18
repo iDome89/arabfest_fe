@@ -14,9 +14,6 @@ if (!contact) return null;
       </div>
       <div className="container mx-auto mt-8 text-center text-gray-500">
         <h3 className="text-lg">{contact.attributes.full_name}</h3>
-        <a href="mailto:kontakt@arabfest.cz">
-          <h3 className="text-lg">{contact.attributes.email}</h3>
-        </a>
         <p className="text-sm">© 2024 Arabfest. All rights reserved.</p>
       </div>
     </footer>

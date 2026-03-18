@@ -5,7 +5,8 @@
     "team": "Tým",
     "program": "Program",
     "partners": "Partneři",
-    "contact": "Kontakt"
+    "contact": "Kontakt",
+    "gallery": "Fotogalerie"
   },
   "about": {
     "title": "O festivalu"
@@ -20,7 +21,7 @@
     "entry_price": "Vstupné"
   },
   "gallery": {
-    "title": "Galerie",
+    "title": "Fotogalerie",
     "photographer": "Fotografové"
   },
   "media": {

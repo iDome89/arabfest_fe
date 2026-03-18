@@ -85,11 +85,7 @@ export const Schedule = () => {
 
   const renderPrimaryEventsForDate = (eventsForDate) => {
     if (!eventsForDate) {
-      return (
-        <div className="text-center text-gray-500">
-          {t("events.in_prep")}
-        </div>
-      );
+      return null;
     }
 
     if (!events) {
@@ -160,11 +156,7 @@ export const Schedule = () => {
 
   const renderSecondaryAndPragueEvents = (eventList) => {
     if (eventList.length === 0) {
-      return (
-        <div className="text-center text-gray-500">
-           {t("events.in_prep")}
-        </div>
-      );
+      return null;
     }
     return eventList.map((event, index) => (
       <li
@@ -303,16 +295,12 @@ export const Schedule = () => {
                 })}
             </div>
             <div className="max-w-xl m-auto" role="tabpanel">
-              {activeDateTab ? (
+              {activeDateTab && (
                 <ul className="space-y-4">
                   {renderPrimaryEventsForDate(
                     groupedPrimaryEvents[activeDateTab]
                   )}
                 </ul>
-              ) : (
-                <div className="text-center text-gray-500">
-                   {t("events.in_prep")}
-                </div>
               )}
             </div>
           </div>

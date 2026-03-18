@@ -5,7 +5,8 @@
         "team": "Team",
         "program": "Program",
         "partners": "Partners",
-        "contact": "Contact"
+        "contact": "Contact",
+        "gallery": "Photo Gallery"
       },
     "about": {
       "title": "About the Festival"
@@ -20,7 +21,7 @@
       "entry_price": "Admission"
     },
     "gallery": {
-      "title": "Gallery",
+      "title": "Photo Gallery",
       "photographer": "Photographers"
     },
     "media": {
