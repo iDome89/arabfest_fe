@@ -90,7 +90,7 @@ export const Navbar = () => {
             </button>
           </div>
         </div>
-        <div className="hidden md:flex space-x-4 sm:space-x-6 w-full justify-end items-center">
+        <div className="hidden md:flex space-x-3 lg:space-x-5 w-full justify-end items-center">
           {navItems.map((item, index) => (
             <Link
               key={index}
@@ -98,7 +98,7 @@ export const Navbar = () => {
               smooth={true}
               duration={500}
               offset={-headerHeight}
-              className={`cursor-pointer transition-colors duration-300 text-xs md:text-sm md:text-md ${
+              className={`cursor-pointer transition-colors duration-300 text-xs lg:text-sm whitespace-nowrap ${
                 isScrolled ? "text-black" : "text-white font-bold"
               }`}
             >
