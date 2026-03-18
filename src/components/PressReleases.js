@@ -12,7 +12,9 @@ export const PressReleases = () => {
     }
   };
 
-  if (!pressReleases || pressReleases.length === 0) {
+  const filteredPressReleases = (pressReleases || []).filter((pr) => pr.attributes.order != null);
+
+  if (filteredPressReleases.length === 0) {
     return null;
   }
   return (
@@ -27,7 +29,7 @@ export const PressReleases = () => {
             </tr>
           </thead>
           <tbody>
-            {pressReleases.filter((pr) => pr.attributes.order != null).map((pressRelease, index) => (
+            {filteredPressReleases.map((pressRelease, index) => (
               <tr key={index}>
                 <th className="text-gray-600 text-xs sm:text-md">
                   {pressRelease.attributes.order}
