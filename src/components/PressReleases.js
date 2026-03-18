@@ -3,19 +3,6 @@ import { useTranslation } from "react-i18next";
 export const PressReleases = () => {
   const { pressReleases } = useGetAll();
   const {t} = useTranslation();
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    const options = {
-      day: "numeric",
-      month: "numeric",
-      year: "numeric",
-      hour12: false,
-    };
-    const locale = navigator.language;
-    const formattedDate = date.toLocaleDateString(locale, options);
-    return `${formattedDate.replace(/\//g, ".")}`;
-  };
-
   const formatSize = (sizeInKB) => {
     if (sizeInKB < 1024) {
       return `${sizeInKB.toFixed(2)} KB`;
@@ -40,10 +27,10 @@ export const PressReleases = () => {
             </tr>
           </thead>
           <tbody>
-            {pressReleases.map((pressRelease, index) => (
+            {pressReleases.filter((pr) => pr.attributes.order != null).map((pressRelease, index) => (
               <tr key={index}>
                 <th className="text-gray-600 text-xs sm:text-md">
-                  {formatDate(pressRelease.attributes.date)}
+                  {pressRelease.attributes.order}
                 </th>
                 <td className="text-gray-600 text-xs sm:text-md">
                   {pressRelease.attributes.name}

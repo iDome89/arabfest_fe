@@ -65,7 +65,7 @@ const generalApi = apiSlice.injectEndpoints({
       query: (params = {}) => {
         const { language } = params;
         return {
-          url: `/press-releases?sort=date&populate=*&locale=${language}`,
+          url: `/press-releases?sort=order&populate=*&locale=${language}`,
         };
       },
       providesTags: ["PressReleases"],
